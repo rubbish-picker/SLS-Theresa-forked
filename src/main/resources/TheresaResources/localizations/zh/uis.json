@@ -1,0 +1,28 @@
+{
+  "theresa:Tags": {
+    "TEXT": [
+      "theresa:微尘",
+      "theresa:萦绕",
+      "theresa:编织",
+      "theresa:丝线",
+      "theresa:此刻仅为你祝福",
+      "theresa:众萨卡兹的恨意",
+      "theresa:特蕾西娅的希望",
+      "theresa:转化"
+    ]
+  },
+  "theresa:Operation": {
+    "TEXT": [
+      "选择",
+      "张微尘放入",
+      "抽牌堆",
+      "手中",
+      "弃牌堆",
+      "消耗堆",
+      "转化为微尘",
+      "选择至多",
+      "张以编织茧笼",
+      "丢弃，若可转化则转化为微尘"
+    ]
+  }
+}

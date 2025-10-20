@@ -1,0 +1,107 @@
+{
+  "theresa:EchoismPower": {
+    "NAME": "魔王回响",
+    "DESCRIPTIONS": [
+      "每当你萦绕时，额外萦绕 #b",
+      " 次。"
+    ]
+  },
+  "theresa:PastDustPower": {
+    "NAME": "过往尘埃",
+    "DESCRIPTIONS": [
+      "当一张牌转化为 #y微尘 时，你获得 #b",
+      " 点格挡。"
+    ]
+  },
+  "theresa:YoreLingerPower": {
+    "NAME": "往昔萦绕身旁",
+    "DESCRIPTIONS": [
+      "你的 theresa:丝线 触发效果后，使该卡牌提升 #b",
+      " 点攻击或格挡值。"
+    ]
+  },
+  "theresa:HatePower": {
+    "NAME": "众萨卡兹的恨意",
+    "DESCRIPTIONS": [
+      "每当你获得恨意时，对所有敌方单位造成 #b",
+      " 点伤害（至多",
+      "点）。 NL 回合结束时若 #r恨意 多于 #g希望 ，将1层 #g希望 转化为 #r恨意 。"
+    ]
+  },
+  "theresa:HopePower": {
+    "NAME": "特蕾西娅的希望",
+    "DESCRIPTIONS": [
+      "每当你获得希望时，获得 #b",
+      " 点格挡（至多",
+      "点）。 NL 回合结束时若 #g希望 多于 #r恨意 ，将1层 #r恨意 转化为 #g希望 。"
+    ]
+  },
+  "theresa:SilkPower": {
+    "NAME": "千丝万缕",
+    "DESCRIPTIONS": [
+      "你的丝线的数值提升 #b",
+      " 点。"
+    ]
+  },
+  "theresa:GiftPower": {
+    "NAME": "血魔的赐福",
+    "DESCRIPTIONS": [
+      "#y盟约：杜卡雷 造成的伤害提升 #b",
+      " 点。"
+    ]
+  },
+  "theresa:SlowBurnPower": {
+    "NAME": "噬光残影",
+    "DESCRIPTIONS": [
+      "在回合结束时，受到 #y缓慢 层数 #b",
+      " 倍的伤害。"
+    ]
+  },
+  "theresa:ThousandsWishPower": {
+    "NAME": "万千愿景",
+    "DESCRIPTIONS": [
+      "你每抽10张牌， #y萦绕 #b",
+      " 次。 NL 目前："
+    ]
+  },
+  "theresa:IntoHistoryPower": {
+    "NAME": "循历史而去",
+    "DESCRIPTIONS": [
+      "你的微尘在 #y萦绕 后，将它放入手中，使其本回合耗能- #b",
+      " 。"
+    ]
+  },
+
+  "theresa:NormalSilk": {
+    "NAME": "theresa:茧笼",
+    "DESCRIPTIONS": [
+      "#y微尘/手牌 ：在你回合结束时，若为攻击牌则对随机敌人造成 #b",
+      " 点伤害，否则使你获得 #b",
+      " 点格挡。"
+    ]
+  },
+  "theresa:TearSilk": {
+    "NAME": "theresa:泪水",
+    "DESCRIPTIONS": [
+      "可以替换 #y茧笼 。 NL #y微尘/手牌 ：在你回合结束时，对随机敌人造成 #b",
+      " 点伤害，并使你获得 #b",
+      " 点格挡。"
+    ]
+  },
+  "theresa:MemorySilk": {
+    "NAME": "theresa:记忆",
+    "DESCRIPTIONS": [
+      "#r不进行复制 NL 打出后移除至多3层 #y恨意 ，若移除数不少于： NL 1，获得 #b",
+      " 层金属化； NL 2，获得 #b",
+      " 层荆棘； NL 3，额外打出一次。"
+    ]
+  },
+  "theresa:MindSilk": {
+    "NAME": "theresa:意志",
+    "DESCRIPTIONS": [
+      "可以替换 #y茧笼 或被它替换。 NL #y微尘/手牌 ：提升希望和恨意 #b",
+      " 点上限。 NL #y复制后 ：获得1层希望或恨意（优先获得层数更低者）。",
+      "#r仅向同类型牌复制 NL #y微尘/手牌 ：提升希望和恨意 #b"
+    ]
+  }
+}

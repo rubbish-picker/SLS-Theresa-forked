@@ -1,0 +1,14 @@
+{
+  "modid": "Theresa_FimmlpS",
+  "name": "Theresa",
+  "author_list": [
+    "FimmlpS"
+  ],
+  "description": "NO DESCRIPTIONS",
+  "dependencies": [
+    "basemod"
+  ],
+  "version": "0.1.0",
+  "sts_version": "12-22-2020",
+  "mts_version": "3.23.2"
+}
