@@ -24,7 +24,8 @@ public class SlowBurnPower extends AbstractTheresaPower {
         AbstractPower p = this.owner.getPower(SlowPower.POWER_ID);
         if(p!=null){
             int amount = p.amount * this.amount;
-            addToBot(new DamageAction(this.owner, new DamageInfo(null,amount,DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+            addToBot(new ApplyPowerAction(owner, owner, new DyingPower(owner, amount), amount));
+            //addToBot(new DamageAction(this.owner, new DamageInfo(null,amount,DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         }
         else {
             addToBot(new ApplyPowerAction(this.owner,this.owner,new SlowPower(this.owner,0)));

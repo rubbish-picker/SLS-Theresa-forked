@@ -17,7 +17,7 @@ public class Babel extends AbstractTheresaCard {
     public Babel() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.COMMON,CardTarget.ALL);
         baseMagicNumber = magicNumber = 1;
-        baseBlock = block = 10;
+        baseBlock = block = 8;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Babel extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeBlock(4);
+            upgradeBlock(3);
         }
     }
 }

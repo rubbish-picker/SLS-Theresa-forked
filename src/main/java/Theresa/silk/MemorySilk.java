@@ -16,14 +16,14 @@ public class MemorySilk extends AbstractSilk{
     public MemorySilk() {
         super(ID);
         this.name = powerStrings.NAME;
-        this.baseAmount = 2;
-        this.amount = 2;
+        this.baseAmount = 1;
+        this.amount = 1;
         this.img = ImageHelper.imgC;
         this.updateDescription();
     }
 
     @Override
-    public boolean canSpreadAtTurnEnd(AbstractCard cardToSpread) {
+    public boolean canSpreadAtTurnEnd(AbstractCard cardToSpread, boolean atTurnEnd) {
         return false;
     }
 

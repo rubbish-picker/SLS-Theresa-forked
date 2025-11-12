@@ -21,7 +21,7 @@
   },
   "theresa:Wish": {
     "NAME": "愿景",
-    "DESCRIPTION": "theresa:黯淡 。 NL 获得 !B! 点 格挡 。 NL 若 theresa:微尘 数量低于上限，抽1张牌。"
+    "DESCRIPTION": "theresa:黯淡 。 NL 获得 !B! 点 格挡 。 NL 若 theresa:微尘 数量低于上限，抽 !M! 张牌。"
   },
   "theresa:ADust": {
     "NAME": "尘埃",
@@ -43,13 +43,12 @@
   },
   "theresa:TowardEndfield": {
     "NAME": "驶向终端",
-    "DESCRIPTION": "丢弃2张手牌。 NL 如果这些弃牌可以转化为 theresa:微尘 ，将其转化。",
-    "UPGRADE_DESCRIPTION": "将随机 theresa:微尘 放入手中。 NL 丢弃2张手牌。 NL 如果这些弃牌可以转化为 theresa:微尘 ，将其转化。"
+    "DESCRIPTION": "theresa:黯淡 。 NL 随机将 !M! 张 theresa:微尘 放入手中，丢弃2张手牌。 NL 如果这些弃牌可以转化为 theresa:微尘 ，将其转化。"
   },
   "theresa:FromNight": {
     "NAME": "生于黑夜",
     "DESCRIPTION": "获得1层 theresa:恨意 。",
-    "UPGRADE_DESCRIPTION": "获得1层 theresa:恨意 。 NL 获得1层 theresa:希望 。"
+    "UPGRADE_DESCRIPTION": "获得1层 theresa:恨意 。 NL 若 *记忆 移除3层恨意，获得1层 theresa:希望 。"
   },
   "theresa:Iterate": {
     "NAME": "更迭",
@@ -65,8 +64,8 @@
     "DESCRIPTION": "theresa:黯淡 。 NL 造成 !D! 点伤害。 NL 使场上所有单位获得 !M! 层 theresa:恨意 。"
   },
   "theresa:LittleTailor": {
-    "NAME": "小裁缝",
-    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 对随机未拥有丝线的手牌 theresa:编织 ： *茧笼 。"
+    "NAME": "小衣匠",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 对随机手牌 theresa:编织 ： *茧笼 。"
   },
   "theresa:Babel": {
     "NAME": "巴别塔",
@@ -74,13 +73,59 @@
   },
   "theresa:WeaveSpread": {
     "NAME": "编织扩散",
-    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 使抽牌堆和弃牌堆中的 theresa:丝线 进行相邻复制。"
+    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害 !M! 次。 NL 使抽牌堆和弃牌堆中的 theresa:丝线 进行相邻复制。"
   },
   "theresa:EmotionSame": {
     "NAME": "情感谐振",
     "DESCRIPTION": "对各敌人造成 !D! 点伤害。 NL 所有敌人转移给你1层 theresa:恨意 ，若未能转移则给予你1层 theresa:希望 。"
   },
+  "theresa:SarkazSee": {
+    "NAME": "萨卡兹见证",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL theresa:重现 1张攻击牌。 NL 消耗 。"
+  },
+  "theresa:AStory": {
+    "NAME": "萨卡兹叙说",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL theresa:重现 1张技能牌。 NL 消耗 。"
+  },
+  "theresa:Hardship": {
+    "NAME": "苦难盘桓",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害，对 theresa:凋亡 效果达到上限的敌人提升至 !M! 点。"
+  },
+  "theresa:SkyDisaster": {
+    "NAME": "天灾",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 给予等量 theresa:凋亡 。"
+  },
+  "theresa:WrongInteraction": {
+    "NAME": "错位|交互",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL *抽到手中时： 与耗能更低的 theresa:微尘 交换，并降低1点耗能。"
+  },
+  "theresa:FlowerSilk": {
+    "NAME": "花茧",
+    "DESCRIPTION": "抽 !M! 张拥有 theresa:丝线 的牌。 NL *成为或离开微尘时 ：对随机手牌 theresa:编织 ： *茧笼 。"
+  },
+  "theresa:EndDust": {
+    "NAME": "末影尘埃",
+    "DESCRIPTION": "获得1层 theresa:末影 。 NL *抽到手中时 ：丢弃此牌并获得 !M! 点 格挡 。 NL 消耗 。"
+  },
+  "theresa:FallFromMemory": {
+    "NAME": "在回忆中坠落",
+    "DESCRIPTION": "若非萦绕打出， theresa:萦绕 1次并增加1点耗能。 NL *萦绕 ：降低 !M! 点耗能并放入手中。"
+  },
+  "theresa:UnseenFuture": {
+    "NAME": "明日遥远不及",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 为 theresa:微尘 中所有基础牌添加 消耗 ，每有1张基础牌 theresa:萦绕 1次。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 为 theresa:微尘 中所有基础牌添加 消耗 ，每有1张消耗牌 theresa:萦绕 1次。"
+  },
 
+  "theresa:ToughHistory": {
+    "NAME": "苦难",
+    "DESCRIPTION": "获得1层 theresa:希望 和 theresa:恨意 ， NL 重复X次。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "获得1层 theresa:希望 和 theresa:恨意 ， NL 重复X次。 NL 然后 theresa:转化 X次。 NL 消耗 。"
+  },
+  "theresa:TimeToDie": {
+    "NAME": "衰亡倒计时",
+    "DESCRIPTION": "每当一张牌被 消耗 或清除，给予生命值最高的敌人 !M! 层 theresa:凋亡 。"
+  },
   "theresa:Silk": {
     "NAME": "丝缕",
     "DESCRIPTION": "获得 !B! 点 格挡 。 NL 获得 [E] 。"
@@ -95,7 +140,7 @@
   },
   "theresa:YoreLinger": {
     "NAME": "往昔萦绕身旁",
-    "DESCRIPTION": "你的 theresa:丝线 触发效果后，使该卡牌提升1点攻击和格挡值。"
+    "DESCRIPTION": "在你回合结束时，给予所有 theresa:微尘 !M! 层 theresa:忘却 。"
   },
   "theresa:DeathOfSarkaz": {
     "NAME": "萨卡兹之殇",
@@ -103,11 +148,11 @@
   },
   "theresa:LightlessShadow": {
     "NAME": "失光之影",
-    "DESCRIPTION": "丢弃所有 theresa:微尘 。 NL 每张造成 !D! 点伤害。"
+    "DESCRIPTION": "丢弃所有 theresa:微尘 。 NL 每张造成 !D! 点伤害， NL 并给予 !M! 层 theresa:凋亡 。"
   },
   "theresa:Forgive": {
     "NAME": "宽恕",
-    "DESCRIPTION": "保留 。 NL 获得 !M! 层 theresa:希望 。 NL 你每次失去生命，这张牌的层数增加1。 NL 消耗 。"
+    "DESCRIPTION": "保留 。 NL 获得1层 theresa:希望 !M! 次。 NL 你每次失去生命，这张牌的层数增加1。 NL 消耗 。"
   },
   "theresa:ThereItIs": {
     "NAME": "■之所在",
@@ -129,7 +174,7 @@
   "theresa:TheAmiya": {
     "NAME": "约定：阿米娅",
     "DESCRIPTION": "固有 ， 消耗 。 NL 获得1层 theresa:残影 。 NL *成为或离开微尘时 ： NL 获得 !M! 层 theresa:希望 。",
-    "FLAVOR": "“今晚的睡前故事……”"
+    "FLAVOR": "“原谅我……”"
   },
   "theresa:TheDoctor": {
     "NAME": "约定：博士",
@@ -141,7 +186,7 @@
   },
   "theresa:TheCat": {
     "NAME": "约定：凯尔希",
-    "DESCRIPTION": "固有 。 NL 将所有 theresa:微尘 放入手中。 NL *成为或离开微尘时 ： NL 获得 [E] 。",
+    "DESCRIPTION": "固有 。 NL 交换等量 theresa:微尘 和手牌。 NL *成为或离开微尘时 ： NL 获得 [E] 。",
     "FLAVOR": "“你找到答案了吗？”"
   },
   "theresa:TheSwordsman": {
@@ -154,11 +199,11 @@
   },
   "theresa:TheKiller": {
     "NAME": "约誓：阿斯卡纶",
-    "DESCRIPTION": "给予所有敌人 *缓慢 。 NL 敌方在回合结束时受到 *缓慢 层数 !M! 倍的伤害。 NL 消耗 。"
+    "DESCRIPTION": "给予所有敌人 *缓慢 。 NL 敌方在回合结束时获得 *缓慢 层数 !M! 倍 theresa:凋亡 。 NL 消耗 。"
   },
   "theresa:TheDale": {
     "NAME": "约誓：维什戴尔",
-    "DESCRIPTION": "获得 theresa:恨意 或 theresa:希望 直至其相等，每获得1层对所有敌人造成 !D! 点伤害。 NL （至多获得6层）"
+    "DESCRIPTION": "失去 theresa:恨意 或 theresa:希望 直至其相等，每失去1层对所有敌人造成 !D! 点伤害。 NL （至多失去6层）"
   },
   "theresa:InsideCrystal": {
     "NAME": "晶簇之内",
@@ -170,7 +215,7 @@
   },
   "theresa:ConnectedPain": {
     "NAME": "痛觉相连",
-    "DESCRIPTION": "展示抽牌堆 !M! 张未拥有 theresa:丝线 的牌，选择任意张 theresa:编织 ： *茧笼 ，每张使你 theresa:失去 1点生命。 NL 消耗 。"
+    "DESCRIPTION": "展示抽牌堆 !M! 张未拥有 theresa:丝线 的牌，选择任意张 theresa:编织 ： *茧笼 ，其他 theresa:编织 ： *意志 。 NL 消耗 。"
   },
   "theresa:Terminate": {
     "NAME": "终结",
@@ -180,6 +225,11 @@
     "NAME": "理想的倒影",
     "DESCRIPTION": "theresa:黯淡 。 NL theresa:萦绕 X次。",
     "UPGRADE_DESCRIPTION": "theresa:黯淡 。 NL 选择至多X张 theresa:微尘 放入手中。 NL theresa:萦绕 X次。"
+  },
+  "theresa:Starter": {
+    "NAME": "启奏",
+    "DESCRIPTION": "theresa:黯淡 ， 固有 。 NL 给予 !M! 层 theresa:凋亡 。 NL 给予1层 虚弱 。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "theresa:黯淡 ， 固有 。 NL 给予 !M! 层 theresa:凋亡 。 NL 给予2层 虚弱 。 NL 消耗 。"
   },
   "theresa:PastCallFuture": {
     "NAME": "自过去呼唤未来",
@@ -191,15 +241,15 @@
   },
   "theresa:MindOscillation": {
     "NAME": "意志震荡",
-    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 若与打出的上一张牌类型相同，对其 theresa:编织 ： *意志 。"
+    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 对你打出的上一张牌 theresa:编织 ： *意志 。"
   },
   "theresa:DeadBreath": {
     "NAME": "死魂灵余息",
-    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 若与打出的上一张牌类型不同，复制到手中并触发1次 theresa:丝线 。 NL 消耗 。"
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 若与打出的上一张牌类型不同，复制到手中并 消耗 ，然后触发1次 theresa:丝线 。"
   },
   "theresa:Branch": {
     "NAME": "分支",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 若不为 theresa:萦绕 ，选择将1张 theresa:微尘 放入抽牌/手牌/弃牌/消耗堆。",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 若不为 theresa:萦绕 打出， NL theresa:萦绕 1次。",
     "EXTENDED_DESCRIPTION": [
       "选择将1张 theresa:微尘 放入抽牌堆。",
       "选择将1张 theresa:微尘 放入手牌。",
@@ -217,10 +267,52 @@
     "DESCRIPTION": "theresa:黯淡 。 NL 失去1个 theresa:微尘 上限。 NL 提升所有 theresa:丝线 1点数值。",
     "UPGRADE_DESCRIPTION": "theresa:黯淡 ， 虚无 。 NL 失去1个 theresa:微尘 上限。 NL 提升所有 theresa:丝线 1点数值。"
   },
+  "theresa:FromRose": {
+    "NAME": "玫瑰河畔的寄语",
+    "DESCRIPTION": "移除6层 theresa:希望 。 NL 获得1层 theresa:希望 !M! 次。 NL 打出后洗回抽牌堆。"
+  },
+  "theresa:FutureStop": {
+    "NAME": "未来于此消失",
+    "DESCRIPTION": "在手中每2张牌之间放入一张 *停格 。 NL 结束你的回合 。 NL 消耗 。"
+  },
+  "theresa:Withering":{
+    "NAME": "凋零",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 给予 !M! 层 theresa:凋亡 。 NL *成为或离开微尘时 ：给予各敌人 !M! 层 theresa:凋亡 。"
+  },
+  "theresa:GoodNight": {
+    "NAME": "予你安息",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 给予 !M! 层 theresa:凋亡 。 NL 给予 theresa:凋亡爆发 。 NL 自动打出选择所有敌人。"
+  },
+  "theresa:BeforeDust": {
+    "NAME": "前尘影事",
+    "DESCRIPTION": "抽 !M! 张牌。 NL 每有1张牌未能抽到手中，造成 !D! 点伤害。 NL 打出后抽牌数+1。"
+  },
+  "theresa:Wordless": {
+    "NAME": "省略",
+    "DESCRIPTION": "theresa:黯淡 。 NL 获得 [E] 。 NL 直到回合结束，你不能再抽牌。",
+    "UPGRADE_DESCRIPTION": "theresa:黯淡 ， 保留 。 NL 获得 [E] 。 NL 直到回合结束，你不能再抽牌。"
+  },
+  "theresa:UnforgivableSin": {
+    "NAME": "罪无可赦",
+    "DESCRIPTION": "可以升级3次。 NL 造成 !D! 点伤害 !M! 次。 NL *移除时 ：向卡组加入1张 *萨卡兹见证 。"
+  },
+  "theresa:NightBeforeWar": {
+    "NAME": "卫国前夜",
+    "DESCRIPTION": "获得1层 theresa:恨意 !M! 次。 NL *移除时 ：向卡组加入1张 *萨卡兹叙说 。"
+  },
+  "theresa:CivilightEterna": {
+    "NAME": "文明的存续",
+    "DESCRIPTION": "theresa:黯淡 ， 虚无 。 NL theresa:重现 !M! 张牌。 NL 使其本回合耗能-1，并在整局游戏 升级 。"
+  },
+  "theresa:SadDust": {
+    "NAME": "哀尘所埃",
+    "DESCRIPTION": "theresa:黯淡 。 NL 向 theresa:微尘 可超出上限地放入 !M! 张 消耗 的 *尘埃 。",
+    "UPGRADE_DESCRIPTION": "theresa:黯淡 ， 保留 。 NL 向 theresa:微尘 可超出上限地放入 !M! 张 消耗 的 *尘埃 。"
+  },
 
   "theresa:GuiltyWillEnd": {
-    "NAME": "罪袂将息",
-    "DESCRIPTION": "theresa:萦绕 !M! 次。 NL 萦绕：将此牌放入手中。 NL 消耗 。"
+    "NAME": "罪挴将息",
+    "DESCRIPTION": "theresa:萦绕 !M! 次。 NL *萦绕后 ：不消耗并将此牌放入手中。 NL 消耗 。"
   },
   "theresa:DustWithLight": {
     "NAME": "和光同尘",
@@ -228,7 +320,8 @@
   },
   "theresa:DustFalls": {
     "NAME": "尘埃落定",
-    "DESCRIPTION": "获得 !M! 层 theresa:希望 。 NL theresa:微尘 ：回合结束时萦绕，并将此牌丢弃。"
+    "DESCRIPTION": "获得 !M! 层 theresa:希望 。",
+    "UPGRADE_DESCRIPTION": "获得 !M! 层 theresa:希望 。 NL 获得1层 theresa:希望 。"
   },
   "theresa:Finale": {
     "NAME": "破碎终曲",
@@ -237,8 +330,8 @@
   },
   "theresa:EternalDust": {
     "NAME": "永恒尘埃",
-    "DESCRIPTION": "抽 !M! 张牌 。 NL 获得 [E] [E] 。",
-    "UPGRADE_DESCRIPTION": "固有 。 NL 抽 !M! 张牌 。 NL 获得 [E] [E] 。"
+    "DESCRIPTION": "抽 !M! 张牌 。 NL 获得 [E] 。",
+    "UPGRADE_DESCRIPTION": "固有 。 NL 抽 !M! 张牌 。 NL 获得 [E] 。"
   },
   "theresa:TheTransformer": {
     "NAME": "盟约：变形者",
@@ -256,12 +349,16 @@
   "theresa:TheWar": {
     "NAME": "盟约：孽茨雷",
     "DESCRIPTION": "theresa:黯淡 。 NL 造成 !D! 点伤害。 NL *抽到时 ：将你的 虚弱 转化为 脆弱 。",
-    "UPGRADE_DESCRIPTION": "theresa:黯淡 。 NL 造成 !D! 点伤害。 NL *抽到时 ：将你的 虚弱 转化为 脆弱 并减少1层。"
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL *抽到时 ：将你的 虚弱 转化为 脆弱 并减少2层。"
   },
   "theresa:ThousandsWish": {
     "NAME": "万千愿景",
-    "DESCRIPTION": "你每抽10张牌， NL theresa:萦绕 !M! 次。",
-    "UPGRADE_DESCRIPTION": "固有 。 NL 你每抽10张牌， NL theresa:萦绕 !M! 次。"
+    "DESCRIPTION": "对随机手牌 theresa:编织 ： *愿景 。 NL 你每抽13张牌， NL theresa:萦绕 !M! 次。",
+    "UPGRADE_DESCRIPTION": "固有 。 NL 对随机手牌 theresa:编织 ： *愿景 。 NL 你每抽13张牌， NL theresa:萦绕 !M! 次。"
+  },
+  "theresa:ManyLight": {
+    "NAME": "阡陌微光",
+    "DESCRIPTION": "将抽牌堆可超出上限地转化为 theresa:微尘 。 NL 将 !M! 张 *微尘 放入手中。 NL 消耗 。"
   },
   "theresa:OnlyForYou": {
     "NAME": "此刻仅为你祝福",
@@ -269,7 +366,24 @@
   },
   "theresa:TheAnswer": {
     "NAME": "盟约：弗莱蒙特",
-    "DESCRIPTION": "theresa:黯淡 。 NL 造成 !D! 点伤害。 NL 丢弃 theresa:微尘 中所有攻击牌，将它们对目标打出。"
+    "DESCRIPTION": "theresa:黯淡 。 NL 造成 !D! 点伤害。 NL 将 theresa:微尘 中所有攻击牌对目标打出。",
+    "UPGRADE_DESCRIPTION": "theresa:黯淡 。 NL 造成 !D! 点伤害。 NL 将 theresa:微尘 中所有牌对目标打出。 NL 消耗 。"
+  },
+  "theresa:MemorizedMemory": {
+    "NAME": "忆我所忆",
+    "DESCRIPTION": "重复直至无法编织： NL 抽1张牌，对随机2张手牌 theresa:编织 ： *意志 。 NL 消耗 。"
+  },
+  "theresa:DyingRose": {
+    "NAME": "凋零玫瑰",
+    "DESCRIPTION": "在你回合开始时，给予所有敌人 !M! 层 theresa:凋亡 和1层 易伤 ，若其凋亡效果达到上限，再给予1层 虚弱 。"
+  },
+  "theresa:Rare": {
+    "NAME": "弥足珍贵",
+    "DESCRIPTION": "theresa:黯淡 。 NL 获得1层 *缓冲 。 NL 从手中打出时使相邻手牌本回合耗能- !M! 。"
+  },
+  "theresa:MindOcean": {
+    "NAME": "索拉里斯之海",
+    "DESCRIPTION": "将你你受到下 !M! 点伤害改为治疗其来源。 NL 消耗 。"
   },
 
   "theresa:TheGift": {
@@ -279,5 +393,18 @@
   "theresa:Originium": {
     "NAME": "“源”",
     "DESCRIPTION": "获得 !M! 点 敏捷 。 NL *成为或离开微尘时 ：获得1点 力量 。 NL 消耗 。"
+  },
+  "theresa:Stop": {
+    "NAME": "停格",
+    "DESCRIPTION": "不能被打出 。 NL 此牌的 *丝线 生效 !M! 次。"
+  },
+
+  "theresa:EasyMode": {
+    "NAME": "假想演绎",
+    "DESCRIPTION": "*简单难度 NL 提升10点最大生命。 NL 升级初始遗物。"
+  },
+  "theresa:NormalMode": {
+    "NAME": "所谓现实",
+    "DESCRIPTION": "*正常难度 NL 这才是你所面对的一切。"
   }
 }

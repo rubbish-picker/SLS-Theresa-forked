@@ -13,7 +13,7 @@ public class TheDale extends AbstractTheresaCard {
 
     public TheDale() {
         super(ID,cardStrings.NAME,2,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ALL_ENEMY);
-        baseDamage = damage = 7;
+        baseDamage = damage = 10;
         isMultiDamage = true;
     }
 

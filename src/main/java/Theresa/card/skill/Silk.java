@@ -1,6 +1,8 @@
 package Theresa.card.skill;
 
 import Theresa.card.AbstractTheresaCard;
+import Theresa.patch.SilkPatch;
+import Theresa.silk.NormalSilk;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -14,7 +16,7 @@ public class Silk extends AbstractTheresaCard {
 
     public Silk() {
         super(ID,cardStrings.NAME,2,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
-        baseBlock = block = 10;
+        baseBlock = block = 9;
     }
 
     @Override
@@ -27,7 +29,8 @@ public class Silk extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeBlock(4);
+            //upgradeBlock(3);
+            SilkPatch.setSilkWithoutTrigger(this,new NormalSilk());
         }
     }
 }

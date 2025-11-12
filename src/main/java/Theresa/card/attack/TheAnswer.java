@@ -17,21 +17,24 @@ public class TheAnswer extends AbstractTheresaCard {
 
     public TheAnswer() {
         super(ID,cardStrings.NAME,2,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.RARE,CardTarget.ENEMY);
-        baseDamage = damage = 10;
+        baseDamage = damage = 15;
         this.tags.add(OtherEnum.Theresa_Darkness);
     }
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
-        addToBot(new AnswerAction(abstractMonster));
+        addToBot(new AnswerAction(abstractMonster,this.upgraded));
     }
 
     @Override
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeDamage(5);
+            upgradeDamage(-5);
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            initializeDescription();
+            this.exhaust = true;
         }
     }
 }

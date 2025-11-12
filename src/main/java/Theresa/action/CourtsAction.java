@@ -42,8 +42,8 @@ public class CourtsAction extends AbstractGameAction {
                         disCard2.upgrade();
                     }
 
-                    disCard.setCostForTurn(0);
-                    disCard2.setCostForTurn(0);
+                    //disCard.setCostForTurn(0);
+                    //disCard2.setCostForTurn(0);
                     disCard.current_x = -1000.0F * Settings.xScale;
                     disCard2.current_x = -1000.0F * Settings.xScale + AbstractCard.IMG_HEIGHT_S;
                     if (this.amount == 1) {

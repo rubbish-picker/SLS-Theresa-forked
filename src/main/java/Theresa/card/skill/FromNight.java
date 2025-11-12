@@ -8,6 +8,7 @@ import Theresa.silk.MemorySilk;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -23,8 +24,11 @@ public class FromNight extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new ApplyPowerAction(abstractPlayer,abstractPlayer,new HatePower(abstractPlayer,1),1));
+    }
+
+    public void onSpecialTrigger(){
         if(upgraded){
-            addToBot(new ApplyPowerAction(abstractPlayer,abstractPlayer,new HopePower(abstractPlayer,1),1));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,new HopePower(AbstractDungeon.player,1),1));
         }
     }
 

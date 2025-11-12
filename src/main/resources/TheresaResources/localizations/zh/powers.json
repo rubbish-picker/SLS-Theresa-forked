@@ -16,8 +16,8 @@
   "theresa:YoreLingerPower": {
     "NAME": "往昔萦绕身旁",
     "DESCRIPTIONS": [
-      "你的 theresa:丝线 触发效果后，使该卡牌提升 #b",
-      " 点攻击或格挡值。"
+      "在你回合结束时，给予所有微尘 #b",
+      " 层 #y忘却 。"
     ]
   },
   "theresa:HatePower": {
@@ -60,7 +60,7 @@
   "theresa:ThousandsWishPower": {
     "NAME": "万千愿景",
     "DESCRIPTIONS": [
-      "你每抽10张牌， #y萦绕 #b",
+      "你每抽13张牌， #y萦绕 #b",
       " 次。 NL 目前："
     ]
   },
@@ -69,6 +69,48 @@
     "DESCRIPTIONS": [
       "你的微尘在 #y萦绕 后，将它放入手中，使其本回合耗能- #b",
       " 。"
+    ]
+  },
+  "theresa:DyingPower": {
+    "NAME": "凋亡",
+    "DESCRIPTIONS": [
+      "这个生物攻击降低 #b",
+      " ％，若凋亡层数不低于生命，将其杀死。"
+    ]
+  },
+  "theresa:TimeToDiePower": {
+    "NAME": "衰亡倒计时",
+    "DESCRIPTIONS": [
+      "每当一张牌被 #y消耗 或清除，给予生命值最高的敌人 #b",
+      " 层 #y凋亡 。"
+    ]
+  },
+  "theresa:DyingRosePower": {
+    "NAME": "凋零玫瑰",
+    "DESCRIPTIONS": [
+      "在你回合开始时，给予所有敌人 #b",
+      " 层 #y凋亡 和1层 #y易伤 ，若其凋亡效果达到上限，再给予1层 #y虚弱 。"
+    ]
+  },
+  "theresa:DyingBurstPower": {
+    "NAME": "凋亡爆发",
+    "DESCRIPTIONS": [
+      "持续 #b",
+      " 回合， #y凋亡 的减伤效果及上限翻倍，在回合结束时失去5点生命。"
+    ]
+  },
+  "theresa:EndPower": {
+    "NAME": "末影",
+    "DESCRIPTIONS": [
+      "每个 #y微尘 会降低 #b",
+      " 点你受到的伤害或生命流失。"
+    ]
+  },
+  "theresa:DiscordPower": {
+    "NAME": "索拉里斯之海",
+    "DESCRIPTIONS": [
+      "将你受到的下 #b",
+      " 点伤害改为治疗伤害来源（若无来源则随机选择敌人）。"
     ]
   },
 
@@ -83,7 +125,7 @@
   "theresa:TearSilk": {
     "NAME": "theresa:泪水",
     "DESCRIPTIONS": [
-      "可以替换 #y茧笼 。 NL #y微尘/手牌 ：在你回合结束时，对随机敌人造成 #b",
+      "可以替换 #y茧笼/意志 。 NL #y微尘/手牌 ：在你回合结束时，对随机敌人造成 #b",
       " 点伤害，并使你获得 #b",
       " 点格挡。"
     ]
@@ -99,9 +141,16 @@
   "theresa:MindSilk": {
     "NAME": "theresa:意志",
     "DESCRIPTIONS": [
-      "可以替换 #y茧笼 或被它替换。 NL #y微尘/手牌 ：提升希望和恨意 #b",
+      "可以替换 #y茧笼 或被它替换。 NL #y微尘 ：提升希望和恨意 #b",
       " 点上限。 NL #y复制后 ：获得1层希望或恨意（优先获得层数更低者）。",
       "#r仅向同类型牌复制 NL #y微尘/手牌 ：提升希望和恨意 #b"
+    ]
+  },
+  "theresa:WishSilk": {
+    "NAME": "theresa:愿景",
+    "DESCRIPTIONS": [
+      "仅当所有牌拥有的愿景少于 #b",
+      " 张时可以编织。 NL #y抽到时 ：可超出上限地转化为微尘。 NL #y微尘 ：在你回合结束时，萦绕1次并将此牌丢弃。"
     ]
   }
 }

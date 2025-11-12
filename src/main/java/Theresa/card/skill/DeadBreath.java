@@ -21,10 +21,10 @@ public class DeadBreath extends AbstractTheresaCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     public DeadBreath() {
-        super(ID,cardStrings.NAME,0,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
-        baseBlock = block = 4;
+        super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
+        baseBlock = block = 6;
         SilkPatch.setSilkWithoutTrigger(this,new MindSilk());
-        this.exhaust = true;
+        //this.exhaust = true;
     }
 
     @Override
@@ -36,12 +36,21 @@ public class DeadBreath extends AbstractTheresaCard {
     }
 
     @Override
+    public boolean shouldExhaust() {
+        return triggerType()!=null;
+    }
+
+    @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new GainBlockAction(abstractPlayer, block));
         AbstractCard c = triggerType();
         if(c != null) {
             SilkPatch.triggerSilk(SilkPatch.TriggerType.ALL,this, CardGroup.CardGroupType.HAND);
-            addToBot(new MakeTempCardInHandAction(this,1));
+            addToBot(new MakeTempCardInHandAction(this.makeSameInstanceOf(),1));
+            this.exhaust = true;
+        }
+        else {
+            this.exhaust = false;
         }
     }
 
@@ -65,7 +74,7 @@ public class DeadBreath extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeBlock(2);
+            upgradeBlock(3);
         }
     }
 }

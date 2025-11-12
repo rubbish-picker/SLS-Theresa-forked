@@ -14,6 +14,10 @@ public abstract class AbstractTheresaCard extends CustomCard {
     public boolean exhaustAfterBlockDamage = false;
     public boolean dontExhaustIfExhaust = false;
 
+    public boolean shouldExhaust(){
+        return this.exhaust;
+    }
+
     public AbstractTheresaCard(String id, String name, int cost, String rawDescription, AbstractCard.CardType type, CardRarity rarity, CardTarget target) {
         super(id, name, StringHelper.getCardIMGPath(id, type), cost, rawDescription, type, ColorEnum.Theresa_COLOR, rarity, target);
     }

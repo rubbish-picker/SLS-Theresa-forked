@@ -20,9 +20,10 @@ public class SetSilkAction extends AbstractGameAction {
     @Override
     public void update() {
         AbstractSilk tmp = SilkPatch.SilkCardField.silk.get(card);
-        if (tmp == null || mustReplace || (canReplace&&silk.canReplace(tmp))) {
-            if(tmp!=null && silk.canReplace(tmp))
-                silk.amount = tmp.amount;
+        if (silk.canSetWhenSet(card) && (tmp == null || mustReplace || (canReplace&&silk.canReplace(tmp)))) {
+            //暂时不复制数值
+//            if(tmp!=null && silk.canReplace(tmp))
+//                silk.amount = tmp.amount;
             SilkPatch.setSilk(card, silk);
             silk.applyPowers();
         }

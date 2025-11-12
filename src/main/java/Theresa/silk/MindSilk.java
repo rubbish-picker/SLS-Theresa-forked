@@ -10,7 +10,13 @@ public class MindSilk extends AbstractSilk {
     public static final String ID = "theresa:MindSilk";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
 
+    public boolean atOnce = false;
+
     public MindSilk() {
+       this(false);
+    }
+
+    public MindSilk(boolean atOnce){
         super(ID);
         this.name = powerStrings.NAME;
         this.baseAmount = 1;
@@ -21,7 +27,12 @@ public class MindSilk extends AbstractSilk {
 
     @Override
     public void onCopied() {
-        AbstractDungeon.actionManager.addToBottom(new SilkFlashAction(this));
+        if(atOnce){
+            atOnce = false;
+            AbstractDungeon.actionManager.addToTop(new SilkFlashAction(this));
+        }
+        else
+            AbstractDungeon.actionManager.addToBottom(new SilkFlashAction(this));
         triggeredOnce();
     }
 

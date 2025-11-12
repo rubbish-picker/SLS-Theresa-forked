@@ -3,20 +3,21 @@ package Theresa.patch;
 import Theresa.action.MemorySilkAction;
 import Theresa.action.SetSilkAction;
 import Theresa.action.YoreLingerAction;
+import Theresa.helper.TheresaHelper;
+import Theresa.modcore.TheresaMod;
 import Theresa.power.buff.YoreLingerPower;
 import Theresa.relic.TheEnd;
 import Theresa.silk.AbstractSilk;
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireField;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,25 @@ public class SilkPatch {
         }
     }
 
+    @SpirePatch(clz = SingleCardViewPopup.class,method = "renderCost")
+    public static class RenderCostPatch{
+        @SpirePrefixPatch
+        public static void Prefix(SingleCardViewPopup _inst, SpriteBatch sb) {
+            AbstractCard card = ReflectionHacks.getPrivate(_inst,SingleCardViewPopup.class, "card");
+            if(card != null) {
+                //TheresaMod.logSomething("=== STATE 1 ===");
+                AbstractSilk silk = SilkCardField.silk.get(card);
+                if (silk != null) {
+                    float current_x = ReflectionHacks.getPrivate(_inst,SingleCardViewPopup.class, "current_x");
+                    float current_y = ReflectionHacks.getPrivate(_inst,SingleCardViewPopup.class, "current_y");
+                    float drawScale = ReflectionHacks.getPrivate(_inst,SingleCardViewPopup.class, "drawScale");
+                    //TheresaMod.logSomething("=== STATE 2 ===");
+                    silk.specialRender(sb, current_x,current_y,drawScale);
+                }
+            }
+        }
+    }
+
     @SpirePatch(clz = AbstractCard.class,method = "makeStatEquivalentCopy")
     public static class MakeStatEquivalentCopyPatch{
         @SpirePostfixPatch
@@ -50,6 +70,7 @@ public class SilkPatch {
             AbstractSilk silk = SilkCardField.silk.get(_inst);
             if (silk != null && _ret != null) {
                 AbstractSilk copy = silk.makeCopy();
+                copy.baseAmount = silk.baseAmount;
                 copy.amount = silk.amount;
                 //复制时不触发
                 setSilkWithoutTrigger(_ret,copy);
@@ -66,7 +87,7 @@ public class SilkPatch {
 
         //trigger
         if (AbstractDungeon.player!=null) {
-            silk.onCopied();
+            triggerSilk(TriggerType.ON_COPIED,card,OtherEnum.Theresa_Dust);
 
             AbstractRelic r = AbstractDungeon.player.getRelic(TheEnd.ID);
             if(AbstractDungeon.actionManager != null && r instanceof TheEnd){
@@ -123,8 +144,8 @@ public class SilkPatch {
 
     public static void atTurnEnd(){
         //expandAllSilk();
-        expandSingleSilk(AbstractDungeon.player.hand.group);
-        expandDustSilk();
+        expandSingleSilk(AbstractDungeon.player.hand.group,true);
+        expandDustSilk(true);
 
         for(AbstractCard c : AbstractDungeon.player.drawPile.group){
             triggerSilk(TriggerType.TURN_END,c, CardGroup.CardGroupType.DRAW_PILE);
@@ -143,11 +164,11 @@ public class SilkPatch {
         }
     }
 
-    public static void expandAllSilk(){
-        expandSingleSilk(AbstractDungeon.player.drawPile.group);
-        expandSingleSilk(AbstractDungeon.player.hand.group);
-        expandSingleSilk(AbstractDungeon.player.discardPile.group);
-        expandDustSilk();
+    public static void expandAllSilk(boolean atTurnEnd){
+        expandSingleSilk(AbstractDungeon.player.drawPile.group,atTurnEnd);
+        expandSingleSilk(AbstractDungeon.player.hand.group,atTurnEnd);
+        expandSingleSilk(AbstractDungeon.player.discardPile.group,atTurnEnd);
+        expandDustSilk(atTurnEnd);
     }
 
     public static void applyPowerToCard(AbstractCard c){
@@ -164,7 +185,7 @@ public class SilkPatch {
         }
     }
 
-    public static void expandSingleSilk(ArrayList<AbstractCard> group){
+    public static void expandSingleSilk(ArrayList<AbstractCard> group, boolean atTurnEnd){
         if(group.size() < 2)
             return;
         AbstractCard lastCard = null;
@@ -182,16 +203,16 @@ public class SilkPatch {
                 nextCard = null;
             AbstractSilk silk = SilkCardField.silk.get(currentCard);
             if(silk != null){
-                if(lastCard!=null && silk.canSpreadAtTurnEnd(lastCard))
+                if(lastCard!=null && silk.canSpreadAtTurnEnd(lastCard,atTurnEnd))
                     AbstractDungeon.actionManager.addToBottom(new SetSilkAction(lastCard,silk.makeCopy()));
-                if(nextCard!=null && silk.canSpreadAtTurnEnd(nextCard))
+                if(nextCard!=null && silk.canSpreadAtTurnEnd(nextCard,atTurnEnd))
                     AbstractDungeon.actionManager.addToBottom(new SetSilkAction(nextCard,silk.makeCopy()));
             }
         }
     }
 
     //微尘首尾相连
-    public static void expandDustSilk(){
+    public static void expandDustSilk(boolean atTurnEnd){
         ArrayList<AbstractCard> group = DustPatch.dustManager.dustCards;
         if(group.size() < 2)
             return;
@@ -214,9 +235,9 @@ public class SilkPatch {
 
             AbstractSilk silk = SilkCardField.silk.get(currentCard);
             if(silk != null){
-                if(lastCard!=null && lastCard!=currentCard && silk.canSpreadAtTurnEnd(lastCard))
+                if(lastCard!=null && lastCard!=currentCard && silk.canSpreadAtTurnEnd(lastCard,atTurnEnd))
                     AbstractDungeon.actionManager.addToBottom(new SetSilkAction(lastCard,silk.makeCopy()));
-                if(nextCard!=null && nextCard!=currentCard && nextCard!=lastCard && silk.canSpreadAtTurnEnd(nextCard))
+                if(nextCard!=null && nextCard!=currentCard && nextCard!=lastCard && silk.canSpreadAtTurnEnd(nextCard,atTurnEnd))
                     AbstractDungeon.actionManager.addToBottom(new SetSilkAction(nextCard,silk.makeCopy()));
             }
         }

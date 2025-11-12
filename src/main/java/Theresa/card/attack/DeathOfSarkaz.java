@@ -72,7 +72,7 @@ public class DeathOfSarkaz extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeDamage(2);
+            //upgradeDamage(2);
             upgradeMagicNumber(1);
         }
     }

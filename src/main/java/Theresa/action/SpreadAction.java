@@ -14,13 +14,13 @@ public class SpreadAction extends AbstractGameAction {
     @Override
     public void update() {
         if(t== CardGroup.CardGroupType.DRAW_PILE)
-            SilkPatch.expandSingleSilk(AbstractDungeon.player.drawPile.group);
+            SilkPatch.expandSingleSilk(AbstractDungeon.player.drawPile.group,false);
         else if(t== CardGroup.CardGroupType.HAND)
-            SilkPatch.expandSingleSilk(AbstractDungeon.player.hand.group);
+            SilkPatch.expandSingleSilk(AbstractDungeon.player.hand.group,false);
         else if(t== CardGroup.CardGroupType.DISCARD_PILE)
-            SilkPatch.expandSingleSilk(AbstractDungeon.player.discardPile.group);
+            SilkPatch.expandSingleSilk(AbstractDungeon.player.discardPile.group,false);
         else if(t== OtherEnum.Theresa_Dust)
-            SilkPatch.expandDustSilk();
+            SilkPatch.expandDustSilk(false);
 
         this.isDone = true;
     }

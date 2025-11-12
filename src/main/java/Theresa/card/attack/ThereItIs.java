@@ -25,7 +25,7 @@ public class ThereItIs extends AbstractTheresaCard {
 
     public ThereItIs() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ENEMY);
-        baseDamage = damage = 9;
+        baseDamage = damage = 7;
         baseMagicNumber = magicNumber = 2;
     }
 

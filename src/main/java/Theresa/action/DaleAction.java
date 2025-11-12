@@ -5,6 +5,8 @@ import Theresa.power.buff.HopePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -31,12 +33,19 @@ public class DaleAction extends AbstractGameAction {
         int powerAmount = Math.abs(hateAmount-hopeAmount);
         if(powerAmount>6)
             powerAmount = 6;
-        AbstractPower powerToObtain = null;
+//        AbstractPower powerToObtain = null;
+//        if(hateAmount>hopeAmount){
+//            powerToObtain = new HopePower(AbstractDungeon.player,powerAmount);
+//        }
+//        else if(hateAmount<hopeAmount){
+//            powerToObtain = new HatePower(AbstractDungeon.player,powerAmount);
+//        }
+        String powerToObtain = null;
         if(hateAmount>hopeAmount){
-            powerToObtain = new HopePower(AbstractDungeon.player,powerAmount);
+            powerToObtain = HatePower.POWER_ID;
         }
-        else if(hateAmount<hopeAmount){
-            powerToObtain = new HatePower(AbstractDungeon.player,powerAmount);
+        else if(hopeAmount>hateAmount){
+            powerToObtain = HopePower.POWER_ID;
         }
 
         if(powerAmount>0 && powerToObtain!=null){
@@ -45,7 +54,8 @@ public class DaleAction extends AbstractGameAction {
                 addToTop(new DamageAllEnemiesAction(AbstractDungeon.player,multiDamage,damageType,attackEffect));
             }
             //power
-            addToTop(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,powerToObtain,powerAmount));
+            //addToTop(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,powerToObtain,powerAmount));
+            addToTop(new ReducePowerAction(AbstractDungeon.player,AbstractDungeon.player,powerToObtain,powerAmount));
         }
 
         this.isDone = true;

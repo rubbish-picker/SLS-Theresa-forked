@@ -2,6 +2,8 @@ package Theresa.card.skill;
 
 import Theresa.action.MyCatAction;
 import Theresa.card.AbstractTheresaCard;
+import Theresa.patch.SilkPatch;
+import Theresa.silk.MindSilk;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -36,7 +38,7 @@ public class TheCat extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeBaseCost(0);
+            SilkPatch.setSilkWithoutTrigger(this,new MindSilk());
         }
     }
 }

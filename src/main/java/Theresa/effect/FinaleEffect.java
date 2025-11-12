@@ -24,10 +24,32 @@ public class FinaleEffect extends AbstractGameEffect {
 
     boolean isTwist;
 
+    public static boolean compiled(){
+        return finaleShader != null && twistShader != null;
+    }
+
     public FinaleEffect(boolean isTwist) {
         duration = startingDuration = 1.2F;
         transitionTime = 0F;
         this.isTwist = isTwist;
+        if(finaleShader == null) {
+            String vertexShader = Gdx.files.internal("TheresaResources/shader/greyFilter/greyFilter.vs").readString();
+            String fragShader = Gdx.files.internal("TheresaResources/shader/greyFilter/greyFilter.fs").readString();
+            finaleShader = new ShaderProgram(vertexShader, fragShader);
+            if (!finaleShader.isCompiled()) {
+                //throw new RuntimeException(finaleShader.getLog());
+
+            }
+        }
+        if(twistShader == null) {
+            String vertexShader = Gdx.files.internal("TheresaResources/shader/twist/twist.vs").readString();
+            String fragShader = Gdx.files.internal("TheresaResources/shader/twist/twist.fs").readString();
+            twistShader = new ShaderProgram(vertexShader, fragShader);
+            if (!twistShader.isCompiled()) {
+                //throw new RuntimeException(twistShader.getLog());
+
+            }
+        }
     }
 
     @Override
@@ -76,22 +98,6 @@ public class FinaleEffect extends AbstractGameEffect {
 
     @Override
     public void render(SpriteBatch sb) {
-        if(finaleShader == null) {
-            String vertexShader = Gdx.files.internal("TheresaResources/shader/greyFilter/greyFilter.vs").readString();
-            String fragShader = Gdx.files.internal("TheresaResources/shader/greyFilter/greyFilter.fs").readString();
-            finaleShader = new ShaderProgram(vertexShader, fragShader);
-            if (!finaleShader.isCompiled()) {
-                throw new RuntimeException(finaleShader.getLog());
-            }
-        }
-        if(twistShader == null) {
-            String vertexShader = Gdx.files.internal("TheresaResources/shader/twist/twist.vs").readString();
-            String fragShader = Gdx.files.internal("TheresaResources/shader/twist/twist.fs").readString();
-            twistShader = new ShaderProgram(vertexShader, fragShader);
-            if (!twistShader.isCompiled()) {
-                throw new RuntimeException(twistShader.getLog());
-            }
-        }
         //sb.draw(emptyRegion,0F,0F, Settings.WIDTH, Settings.HEIGHT);
         sb.end();
         TextureRegion region = getScreenAsTexture(sb);

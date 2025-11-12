@@ -4,6 +4,7 @@ import Theresa.action.HateAction;
 import Theresa.patch.DustPatch;
 import Theresa.patch.SilkPatch;
 import Theresa.power.AbstractTheresaPower;
+import Theresa.relic.TheRecall;
 import Theresa.silk.AbstractSilk;
 import Theresa.silk.MindSilk;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -28,7 +29,7 @@ public class HatePower extends AbstractTheresaPower {
         updateDescription();
     }
 
-    public int initialMax = 8;
+    public int initialMax = 6;
     public int extraMax = 0;
 
     @Override
@@ -103,7 +104,8 @@ public class HatePower extends AbstractTheresaPower {
             }
             return;
         }
-        ArrayList<AbstractCard> group = new ArrayList<>(AbstractDungeon.player.hand.group);
+        //ArrayList<AbstractCard> group = new ArrayList<>(AbstractDungeon.player.hand.group);
+        ArrayList<AbstractCard> group = new ArrayList<>();
         group.addAll(DustPatch.dustManager.dustCards);
         int ex = 0;
         for(AbstractCard c : group) {
@@ -111,6 +113,8 @@ public class HatePower extends AbstractTheresaPower {
             if(silk instanceof MindSilk)
                 ex+=silk.amount;
         }
+        if(AbstractDungeon.player.hasRelic(TheRecall.ID))
+            ex+=2;
         if(ex!=extraMax){
             extraMax = ex;
             updateDescription();

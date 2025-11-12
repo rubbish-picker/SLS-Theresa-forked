@@ -15,7 +15,7 @@ public class PastDust extends AbstractTheresaCard {
 
     public PastDust() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.POWER,CardRarity.UNCOMMON,CardTarget.SELF);
-        baseMagicNumber = magicNumber = 3;
+        baseMagicNumber = magicNumber = 2;
     }
 
     @Override

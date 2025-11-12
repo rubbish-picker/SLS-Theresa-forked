@@ -28,6 +28,9 @@ public class Terminate extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
+        if(isInAutoplay){
+            calculateCardDamage(abstractMonster);
+        }
         addToBot(new TheresaAttackAction(true));
         addToBot(new TerminateAction(abstractPlayer,freeToPlayOnce,energyOnUse));
         for(int i =0;i<magicNumber;i++)
@@ -36,6 +39,9 @@ public class Terminate extends AbstractTheresaCard {
 
     private int getCurrentEnergy(){
         int energy = EnergyPanel.getCurrentEnergy();
+        if(isInAutoplay){
+            energy = Math.max(energy, energyOnUse);
+        }
         if(AbstractDungeon.player.hasRelic(ChemicalX.ID)){
             energy += 2;
         }
@@ -43,6 +49,7 @@ public class Terminate extends AbstractTheresaCard {
     }
 
     private int getSilkAmount(){
+
         int amount = 0;
         for(AbstractCard c : AbstractDungeon.player.hand.group){
             if(SilkPatch.SilkCardField.silk.get(c) != null)

@@ -17,7 +17,7 @@ public class TheWar extends AbstractTheresaCard {
 
     public TheWar() {
         super(ID,cardStrings.NAME,3,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.RARE,CardTarget.ENEMY);
-        baseDamage = damage = 48;
+        baseDamage = damage = 44;
         this.tags.add(OtherEnum.Theresa_Darkness);
     }
 
@@ -35,7 +35,9 @@ public class TheWar extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            //upgradeDamage(12);
+            tags.remove(OtherEnum.Theresa_Darkness);
+            upgradeBaseCost(2);
+            upgradeDamage(-20);
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }

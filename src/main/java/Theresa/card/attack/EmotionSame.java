@@ -14,7 +14,7 @@ public class EmotionSame extends AbstractTheresaCard {
 
     public EmotionSame() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.COMMON,CardTarget.ALL_ENEMY);
-        baseDamage = damage = 8;
+        baseDamage = damage = 6;
         this.isMultiDamage = true;
     }
 

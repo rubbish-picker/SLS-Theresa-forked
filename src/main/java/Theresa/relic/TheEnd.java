@@ -12,19 +12,32 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.PowerTip;
 
 public class TheEnd extends CustomRelic {
     public static final String ID = "theresa:TheEnd";
 
+    boolean triggered = false;
+
     public TheEnd() {
         super(ID, ImageMaster.loadImage(StringHelper.getRelicIMGPATH(ID,false)),ImageMaster.loadImage(StringHelper.getRelicIMGPATH(ID,true)),RelicTier.BOSS,LandingSound.MAGICAL);
         this.counter = -1;
+        tips.add(new PowerTip(DESCRIPTIONS[1],DESCRIPTIONS[2]));
+    }
+
+    @Override
+    public void atPreBattle() {
+        triggered = false;
     }
 
     @Override
     public void atTurnStartPostDraw() {
-        this.flash();
-        addToBot(new RandomSilkAction(new NormalSilk(),false,true));
+        if(!triggered) {
+            triggered = true;
+            this.flash();
+            addToBot(new RandomSilkAction(new NormalSilk(),false,true));
+            addToBot(new RandomSilkAction(new NormalSilk(),false,true));
+        }
     }
 
     public void onTriggerSilk(AbstractCard c){

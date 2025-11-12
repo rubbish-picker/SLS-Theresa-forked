@@ -16,14 +16,14 @@ public class LittleTailor extends AbstractTheresaCard {
 
     public LittleTailor() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
-        baseBlock = block = 8;
+        baseBlock = block = 7;
         SilkPatch.setSilkForPreview(this,new NormalSilk());
     }
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new GainBlockAction(abstractPlayer, block));
-        addToBot(new RandomSilkAction(new NormalSilk(),false,false));
+        addToBot(new RandomSilkAction(new NormalSilk(),false,true));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Spot extends AbstractTheresaCard {
 
     public Spot() {
         super(ID,cardStrings.NAME,0,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
-        baseDamage = damage = 5;
+        baseDamage = damage = 4;
         this.tags.add(OtherEnum.Theresa_Darkness);
     }
 

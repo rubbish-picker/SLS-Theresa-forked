@@ -35,8 +35,8 @@ public class ThousandsWishPower extends AbstractTheresaPower {
     @Override
     public void onCardDraw(AbstractCard card) {
         extraAmount++;
-        if(extraAmount >= 10){
-            extraAmount -= 10;
+        if(extraAmount >= 13){
+            extraAmount -= 13;
             this.flash();
             addToBot(new DustAction(this.amount));
         }

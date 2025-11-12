@@ -14,20 +14,22 @@ public class LightlessShadow extends AbstractTheresaCard {
 
     public LightlessShadow() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ENEMY);
-        baseDamage = damage = 11;
+        baseDamage = damage = 7;
+        baseMagicNumber = magicNumber = 3;
     }
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
-        addToBot(new LightlessAction(abstractMonster,damage,damageTypeForTurn,attackEffect));
+        addToBot(new LightlessAction(abstractMonster,damage,damageTypeForTurn,attackEffect,magicNumber));
     }
 
     @Override
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeDamage(4);
+            upgradeDamage(1);
+            upgradeMagicNumber(1);
         }
     }
 }

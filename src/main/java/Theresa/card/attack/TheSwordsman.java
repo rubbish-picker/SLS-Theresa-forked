@@ -34,7 +34,7 @@ public class TheSwordsman extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeDamage(4);
+            upgradeDamage(1);
             upgradeMagicNumber(1);
             SilkPatch.SilkCardField.silkTriggerTimes.set(this,magicNumber);
         }

@@ -14,24 +14,24 @@ public class Wish extends AbstractTheresaCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     public Wish() {
-        super(ID,cardStrings.NAME,0,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.BASIC,CardTarget.SELF);
-        baseBlock = block = 3;
-        baseMagicNumber = magicNumber = 2;
+        super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.BASIC,CardTarget.SELF);
+        baseBlock = block = 7;
+        baseMagicNumber = magicNumber = 1;
         this.tags.add(OtherEnum.Theresa_Darkness);
     }
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new GainBlockAction(abstractPlayer, block));
-        addToBot(new LessDrawAction(1));
+        addToBot(new LessDrawAction(magicNumber));
     }
 
     @Override
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeBlock(3);
-            //upgradeMagicNumber(1);
+            upgradeBlock(1);
+            upgradeMagicNumber(1);
         }
     }
 }

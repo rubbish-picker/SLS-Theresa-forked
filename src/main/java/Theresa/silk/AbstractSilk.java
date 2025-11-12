@@ -22,7 +22,7 @@ public abstract class AbstractSilk {
     public int baseAmount = -1;
     public int amount = -1;
 
-    public boolean canSpreadAtTurnEnd(AbstractCard cardToSpread) {
+    public boolean canSpreadAtTurnEnd(AbstractCard cardToSpread, boolean atTurnEnd) {
         return true;
     }
 
@@ -37,11 +37,30 @@ public abstract class AbstractSilk {
         if(sp!=null){
             this.amount = baseAmount + sp.amount;
         }
+        else{
+            this.amount = baseAmount;
+        }
         updateDescription();
     }
 
     public void onCopied(){
 
+    }
+
+    public void specialRender(SpriteBatch sb, float x, float y, float drawScale){
+        if (img != null && card != null) {
+            sb.setColor(Color.WHITE.cpy());
+            float originX = img.getRegionX();
+            float originY = img.getRegionY();
+            float width = img.getRegionWidth();
+            float height = img.getRegionHeight();
+            sb.draw(img, x - 200F * drawScale * Settings.scale, y - 16F * drawScale * Settings.scale, originX, originY, width, height, drawScale * Settings.scale, drawScale * Settings.scale, 0F);
+            //sb.draw(img,card.current_x, card.current_y, originX,originY,width,height,card.drawScale*Settings.scale,card.drawScale*Settings.scale,card.angle);
+            if (amount >= 0) {
+                Color color = Color.GRAY.cpy();
+                FontHelper.renderFontCentered(sb, FontHelper.cardTitleFont, String.valueOf(amount), x + -178F * drawScale * Settings.xScale, y + -24.0F * drawScale * Settings.yScale, color);
+            }
+        }
     }
 
     public void render(SpriteBatch sb, Color renderColor) {
@@ -72,6 +91,10 @@ public abstract class AbstractSilk {
         return false;
     }
 
+    public boolean canSetWhenSet(AbstractCard c){
+        return true;
+    }
+
     public void atTurnEnd(CardGroup.CardGroupType type) {
 
     }
@@ -82,10 +105,10 @@ public abstract class AbstractSilk {
 
     public void triggeredOnce(){
         //power
-        AbstractPower p = AbstractDungeon.player.getPower(YoreLingerPower.POWER_ID);
-        if(p!=null){
-            AbstractDungeon.actionManager.addToBottom(new YoreLingerAction(card,p.amount));
-        }
+//        AbstractPower p = AbstractDungeon.player.getPower(YoreLingerPower.POWER_ID);
+//        if(p!=null){
+//            AbstractDungeon.actionManager.addToBottom(new YoreLingerAction(card,p.amount));
+//        }
     }
 
     public abstract AbstractSilk makeCopy();

@@ -2,6 +2,8 @@ package Theresa.card.skill;
 
 import Theresa.action.ConnectedPainAction;
 import Theresa.card.AbstractTheresaCard;
+import Theresa.patch.SilkPatch;
+import Theresa.silk.MindSilk;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -13,8 +15,9 @@ public class ConnectedPain extends AbstractTheresaCard {
 
     public ConnectedPain() {
         super(ID,cardStrings.NAME,0,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
-        baseMagicNumber = magicNumber = 3;
+        baseMagicNumber = magicNumber = 2;
         exhaust = true;
+        SilkPatch.setSilkForPreview(this,new MindSilk());
     }
 
     @Override
@@ -26,7 +29,7 @@ public class ConnectedPain extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeMagicNumber(2);
+            upgradeMagicNumber(1);
         }
     }
 }

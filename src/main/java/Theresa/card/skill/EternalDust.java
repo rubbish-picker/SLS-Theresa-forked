@@ -2,6 +2,7 @@ package Theresa.card.skill;
 
 import Theresa.card.AbstractTheresaCard;
 import Theresa.patch.SilkPatch;
+import Theresa.silk.AbstractSilk;
 import Theresa.silk.MemorySilk;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
@@ -15,7 +16,7 @@ public class EternalDust extends AbstractTheresaCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     public EternalDust() {
-        super(ID,cardStrings.NAME,2,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.RARE,CardTarget.NONE);
+        super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.SKILL,CardRarity.RARE,CardTarget.NONE);
         baseMagicNumber = magicNumber = 1;
 
         SilkPatch.setSilkWithoutTrigger(this,new MemorySilk());
@@ -24,16 +25,18 @@ public class EternalDust extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new DrawCardAction(abstractPlayer,magicNumber));
-        addToBot(new GainEnergyAction(2));
+        addToBot(new GainEnergyAction(1));
     }
 
     @Override
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            initializeDescription();
-            this.isInnate = true;
+            AbstractSilk silk = SilkPatch.SilkCardField.silk.get(this);
+            if(silk != null) {
+                silk.baseAmount++;
+                silk.amount = silk.baseAmount;
+            }
         }
     }
 }

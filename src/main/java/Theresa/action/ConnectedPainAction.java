@@ -3,6 +3,7 @@ package Theresa.action;
 import Theresa.helper.StringHelper;
 import Theresa.patch.SilkPatch;
 import Theresa.silk.AbstractSilk;
+import Theresa.silk.MindSilk;
 import Theresa.silk.NormalSilk;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -21,6 +22,7 @@ public class ConnectedPainAction extends AbstractGameAction {
     }
 
     boolean selected = false;
+    ArrayList<AbstractCard> realTmp;
 
     @Override
     public void update() {
@@ -39,7 +41,7 @@ public class ConnectedPainAction extends AbstractGameAction {
                 return;
             }
             Collections.shuffle(tmp,AbstractDungeon.cardRandomRng.random);
-            ArrayList<AbstractCard> realTmp = new ArrayList<>();
+            realTmp = new ArrayList<>();
             for(int i =0; i<this.amount; i++){
                 realTmp.add(tmp.get(i));
             }
@@ -49,14 +51,18 @@ public class ConnectedPainAction extends AbstractGameAction {
         }
         else if(!selected){
             selected = true;
-            int amount = 0;
             for(AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards){
+                realTmp.remove(c);
                 AbstractSilk silk = new NormalSilk();
                 SilkPatch.setSilk(c,silk);
                 silk.applyPowers();
-                amount++;
             }
-            addToTop(new LostHPAction(AbstractDungeon.player,AbstractDungeon.player,amount));
+            for(AbstractCard c : realTmp){
+                AbstractSilk silk = new MindSilk();
+                SilkPatch.setSilk(c,silk);
+                silk.applyPowers();
+            }
+
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
         }
 

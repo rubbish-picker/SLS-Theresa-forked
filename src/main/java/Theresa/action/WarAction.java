@@ -19,7 +19,7 @@ public class WarAction extends AbstractGameAction {
     @Override
     public void update() {
         if(i){
-            addToTop(new ReducePowerAction(AbstractDungeon.player,AbstractDungeon.player,FrailPower.POWER_ID,1));
+            addToTop(new ReducePowerAction(AbstractDungeon.player,AbstractDungeon.player,FrailPower.POWER_ID,2));
         }
         AbstractPower weak = AbstractDungeon.player.getPower(WeakPower.POWER_ID);
         if(weak!=null){

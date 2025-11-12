@@ -53,10 +53,7 @@ public class MindOscillation extends AbstractTheresaCard {
             for(int i = tmp.size()-1;i>=0;i--) {
                 AbstractCard c = tmp.get(i);
                 if(c!=this){
-                    if(c.type == this.type){
-                        return c;
-                    }
-                    return null;
+                    return c;
                 }
             }
         }

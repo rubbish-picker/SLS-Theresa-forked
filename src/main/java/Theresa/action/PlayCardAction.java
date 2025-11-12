@@ -3,6 +3,7 @@ package Theresa.action;
 import Theresa.patch.CardPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
+import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -43,6 +44,7 @@ public class PlayCardAction extends AbstractGameAction {
 
             card.purgeOnUse = this.purge;
             AbstractDungeon.player.limbo.group.add(card);
+            CardPatch.LingerField.isLingeredCard.set(card,true);
             CardPatch.LingerField.lingerPlayed.set(card,false);
 
             //确定位置
@@ -80,13 +82,15 @@ public class PlayCardAction extends AbstractGameAction {
                 this.addToTop(new NewQueueCardAction(card,true,false,true));
             }
 
-            //this.addToTop(new UnlimboAction(card));
+
             this.addToTop(new WaitAction(0.1F));
             if (!Settings.FAST_MODE) {
                 this.addToTop(new WaitAction(Settings.ACTION_DUR_MED));
             } else {
                 this.addToTop(new WaitAction(Settings.ACTION_DUR_FASTER));
             }
+
+            //addToBot(new DelayActionAction(new UnlimboAction(card)));
 
             this.isDone = true;
         }

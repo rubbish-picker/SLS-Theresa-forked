@@ -2,12 +2,17 @@ package Theresa.patch;
 
 
 import Theresa.action.DustAction;
+import Theresa.action.ForgetAction;
 import Theresa.action.PlayCardAction;
 import Theresa.card.AbstractTheresaCard;
 import Theresa.character.Theresa;
+import Theresa.helper.TheresaHelper;
 import Theresa.modcore.TheresaMod;
 import Theresa.power.AbstractTheresaPower;
+import Theresa.power.buff.EndPower;
 import Theresa.power.buff.IntoHistoryPower;
+import Theresa.relic.TenRings;
+import Theresa.silk.WishSilk;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardTags;
 import com.badlogic.gdx.Gdx;
@@ -28,6 +33,7 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 
 import java.util.ArrayList;
@@ -58,7 +64,9 @@ public class DustPatch {
         c.lighten(false);
         c.drawScale = 0.12F;
         c.targetDrawScale = CIRCLE_DRAW_SCALE;
+        CardScaleField.drawnAsDust.set(c,true);
         c.triggerWhenDrawn();
+        CardScaleField.drawnAsDust.set(c,false);
         dustManager.addCard(c);
         p.drawPile.removeCard(c);
 
@@ -75,6 +83,7 @@ public class DustPatch {
     public static class CardScaleField{
         public static SpireField<Float> xScale = new SpireField<>(() -> 1.0F);
         public static SpireField<Boolean> before = new SpireField<>(() -> true);
+        public static SpireField<Boolean> drawnAsDust = new SpireField<>(() -> false);
     }
 
     @SpirePatch(clz = SpriteBatch.class, method = "draw", paramtypez = {TextureRegion.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class})
@@ -181,41 +190,41 @@ public class DustPatch {
 
     //抽牌转化
     @SpirePatch(clz = DrawCardAction.class, method = "update")
-    public static class ChargeDrawPatch{
+    public static class ChargeDrawPatch {
 
         //抽牌数溢出修正 当且仅当 手牌满且抽牌堆顶不为攻击牌或技能牌时不执行
-        @SpireInsertPatch(rloc = 42,localvars = {"handSizeAndDraw"})
-        public static void InsertBefore(DrawCardAction _inst, @ByRef int[] handSizeAndDraw){
-            if(!dustManager.isFull()){
-                if(AbstractDungeon.player.hand.size()>=10){
-                    if(AbstractDungeon.player.drawPile.isEmpty())
+        @SpireInsertPatch(rloc = 42, localvars = {"handSizeAndDraw"})
+        public static void InsertBefore(DrawCardAction _inst, @ByRef int[] handSizeAndDraw) {
+            if (!dustManager.isFull()) {
+                if (AbstractDungeon.player.hand.size() >= 10) {
+                    if (AbstractDungeon.player.drawPile.isEmpty())
                         return;
                     AbstractCard c = AbstractDungeon.player.drawPile.getTopCard();
-                    if(c.type!= AbstractCard.CardType.ATTACK && c.type != AbstractCard.CardType.SKILL)
+                    if (c.type != AbstractCard.CardType.ATTACK && c.type != AbstractCard.CardType.SKILL)
                         return;
-                    if(CardTags.hasTag(c,OtherEnum.Theresa_Darkness))
+                    if (CardTags.hasTag(c, OtherEnum.Theresa_Darkness))
                         return;
                 }
                 int dustRemains = dustManager.dustUpLimit - dustManager.dustCards.size();
                 handSizeAndDraw[0] += dustRemains;
-                if(handSizeAndDraw[0] > 0)
+                if (handSizeAndDraw[0] > 0)
                     handSizeAndDraw[0] = 0;
                 banFullDialog = true;
             }
         }
 
         @SpireInsertPatch(rloc = 45)
-        public static void InsertAfter(DrawCardAction _inst){
+        public static void InsertAfter(DrawCardAction _inst) {
             banFullDialog = false;
         }
 
         //禁止创建抽牌满警告
 
         @SpireInsertPatch(rloc = 71)
-        public static SpireReturn<Void> Insert(DrawCardAction _inst){
+        public static SpireReturn<Void> Insert(DrawCardAction _inst) {
             try {
-                if (!dustManager.isFull()) {
-                    AbstractCard c = AbstractDungeon.player.drawPile.getTopCard();
+                AbstractCard c = AbstractDungeon.player.drawPile.getTopCard();
+                if (!dustManager.isFull() || (SilkPatch.SilkCardField.silk.get(c) instanceof WishSilk)) {
                     if (!CardTags.hasTag(c, OtherEnum.Theresa_Darkness)) {
                         if (c.type == AbstractCard.CardType.ATTACK || c.type == AbstractCard.CardType.SKILL) {
                             drawPileToDust();
@@ -226,8 +235,8 @@ public class DustPatch {
                         }
                     }
                 }
-            }
-            catch (Exception e){
+
+            } catch (Exception e) {
                 TheresaMod.logSomething("Something went wrong with CHARGE DRAW!!!");
             }
             return SpireReturn.Continue();
@@ -265,6 +274,18 @@ public class DustPatch {
         }
     }
 
+    @SpirePatch(clz = AbstractPlayer.class,method = "updateCardsOnDamage")
+    public static class UpdateCardsOnDamagePatch{
+        @SpirePostfixPatch
+        public static void Postfix(AbstractPlayer _inst){
+            if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT){
+                for(AbstractCard c:DustPatch.dustManager.dustCards){
+                    c.tookDamage();
+                }
+            }
+        }
+    }
+
 
     public static void preBattle(){
         dustManager.preBattle();
@@ -292,8 +313,11 @@ public class DustPatch {
 
         public void preBattle(){
             dustCards.clear();
-            if(AbstractDungeon.player instanceof Theresa)
+            if(AbstractDungeon.player instanceof Theresa){
                 dustUpLimit = 3;
+//                if(AbstractDungeon.player.hasRelic(TenRings.ID))
+//                    dustUpLimit = 1;
+            }
             else
                 dustUpLimit = 0;
         }
@@ -315,16 +339,26 @@ public class DustPatch {
 
         public int blockDamage(int damageAmount){
             ArrayList<AbstractCard> cardsToExhaust = new ArrayList<>();
+            int baseAmt = 0;
+            AbstractPower endPower = AbstractDungeon.player.getPower(EndPower.POWER_ID);
+            if(endPower!=null && endPower.amount>0){
+                baseAmt = endPower.amount;
+                if(damageAmount>0){
+                    endPower.flashWithoutSound();
+                }
+            }
             for(AbstractCard c : dustCards){
+                int amt = baseAmt;
                 if(c instanceof AbstractTheresaCard){
-                    int amt = ((AbstractTheresaCard) c).blockDamageIfDust();
-                    damageAmount -= amt;
-                    if(amt>0 && ((AbstractTheresaCard) c).exhaustAfterBlockDamage)
+                    int tmpAmt = ((AbstractTheresaCard) c).blockDamageIfDust();
+                    if(tmpAmt>0 && ((AbstractTheresaCard) c).exhaustAfterBlockDamage)
                         cardsToExhaust.add(c);
-                    if(damageAmount <= 0){
-                        damageAmount = 0;
-                        break;
-                    }
+                    amt += tmpAmt;
+                }
+                damageAmount -= amt;
+                if(damageAmount <= 0){
+                    damageAmount = 0;
+                    break;
                 }
             }
             for(AbstractCard c : cardsToExhaust){
@@ -351,16 +385,20 @@ public class DustPatch {
                 if(lingeredCard instanceof AbstractTheresaCard){
                     ((AbstractTheresaCard) lingeredCard).triggerWhenLingered();
 
+                    //根据这部分定义可以消耗
+                    if (((AbstractTheresaCard) lingeredCard).shouldExhaust())
+                        exhaustSource = true;
+
                     //部分卡牌可以阻止消耗
                     if(((AbstractTheresaCard) lingeredCard).dontExhaustIfExhaust)
                         exhaustSource = false;
                 }
 
-                //循历史而去，会阻止消耗牌的消耗
+                //循历史而去，(已经废除：会阻止消耗牌的消耗)
                 AbstractPower ih = AbstractDungeon.player.getPower(IntoHistoryPower.POWER_ID);
-                if(ih instanceof IntoHistoryPower){
+                if(!AbstractDungeon.actionManager.turnHasEnded && ih instanceof IntoHistoryPower){
                     ((IntoHistoryPower) ih).triggerCard(lingeredCard);
-                    exhaustSource = false;
+                    //exhaustSource = false;
                 }
 
                 AbstractCard c = lingeredCard.makeSameInstanceOf();
@@ -399,11 +437,20 @@ public class DustPatch {
             return null;
         }
 
-        public void addCard(AbstractCard c){
+        public void addCard(AbstractCard c,int index){
+            if(AbstractDungeon.player.hoveredCard == c){
+                AbstractDungeon.player.releaseCard();
+            }
             c.untip();
             c.unhover();
             c.stopGlowing();
-            dustCards.add(c);
+            c.unfadeOut();
+            c.resetAttributes();
+            if(index<0||index>dustCards.size()){
+                dustCards.add(c);
+            }
+            else
+                dustCards.add(index,c);
 
             for(AbstractPower p : AbstractDungeon.player.powers){
                 if(p instanceof AbstractTheresaPower){
@@ -416,12 +463,19 @@ public class DustPatch {
             }
         }
 
+        public void addCard(AbstractCard c){
+            this.addCard(c, -1);
+        }
+
         public void removeCard(AbstractCard c){
             c.untip();
             c.unhover();
             c.stopGlowing();
             dustCards.remove(c);
-
+            int forgetAmount = TheresaHelper.getForgetAmount(c);
+            if(forgetAmount>0){
+                AbstractDungeon.actionManager.addToBottom(new ForgetAction(forgetAmount));
+            }
             if(c instanceof AbstractTheresaCard){
                 ((AbstractTheresaCard) c).triggerWhenNoLongerDust();
             }

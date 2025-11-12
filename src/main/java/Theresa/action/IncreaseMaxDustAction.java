@@ -15,11 +15,11 @@ public class IncreaseMaxDustAction extends AbstractGameAction {
         DustPatch.dustManager.dustUpLimit += this.amount;
         if(DustPatch.dustManager.dustUpLimit > 10) {
             DustPatch.dustManager.dustUpLimit = 10;
-            addToTop(new TalkAction(AbstractDungeon.player,"..."));
+            addToTop(new TalkAction(true,"...",1F,2F));
         }
         else if(DustPatch.dustManager.dustUpLimit < 0) {
             DustPatch.dustManager.dustUpLimit = 0;
-            addToTop(new TalkAction(AbstractDungeon.player,"..."));
+            addToTop(new TalkAction(true,"...",1F,2F));
         }
         this.isDone = true;
     }

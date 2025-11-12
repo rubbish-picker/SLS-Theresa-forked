@@ -18,7 +18,7 @@ public class WhereIsHome extends AbstractTheresaCard {
 
     public WhereIsHome() {
         super(ID,cardStrings.NAME,1,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        baseDamage = damage = 18;
+        baseDamage = damage = 14;
         this.baseMagicNumber = magicNumber = 1;
         this.tags.add(OtherEnum.Theresa_Darkness);
     }
@@ -38,7 +38,7 @@ public class WhereIsHome extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeDamage(7);
+            upgradeDamage(6);
         }
     }
 }

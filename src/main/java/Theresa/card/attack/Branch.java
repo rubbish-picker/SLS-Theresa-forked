@@ -1,7 +1,9 @@
 package Theresa.card.attack;
 
 import Theresa.action.ChooseDustToPileAction;
+import Theresa.action.DustAction;
 import Theresa.card.AbstractTheresaCard;
+import Theresa.patch.DustPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
@@ -23,22 +25,25 @@ public class Branch extends AbstractTheresaCard {
 
     public Branch() {
         super(ID,cardStrings.NAME,2,cardStrings.DESCRIPTION,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ENEMY);
-        baseDamage = damage = 19;
+        baseDamage = damage = 15;
     }
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
+//        if(!dontTriggerOnUseCard && !DustPatch.dustManager.dustCards.isEmpty()){
+//            ArrayList<AbstractCard> selections = new ArrayList<>();
+//            for(int i =0;i<4;i++){
+//                Branch b = new Branch();
+//                b.rawDescription = cardStrings.EXTENDED_DESCRIPTION[i];
+//                b.initializeDescription();
+//                selections.add(b);
+//                b.selection = i;
+//            }
+//            addToBot(new ChooseOneAction(selections));
+//        }
         if(!dontTriggerOnUseCard){
-            ArrayList<AbstractCard> selections = new ArrayList<>();
-            for(int i =0;i<4;i++){
-                Branch b = new Branch();
-                b.rawDescription = cardStrings.EXTENDED_DESCRIPTION[i];
-                b.initializeDescription();
-                selections.add(b);
-                b.selection = i;
-            }
-            addToBot(new ChooseOneAction(selections));
+            addToBot(new DustAction(1));
         }
     }
 
@@ -66,7 +71,7 @@ public class Branch extends AbstractTheresaCard {
     public void upgrade() {
         if(!upgraded) {
             upgradeName();
-            upgradeDamage(7);
+            upgradeDamage(5);
         }
     }
 }

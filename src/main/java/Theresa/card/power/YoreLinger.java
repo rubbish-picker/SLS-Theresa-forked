@@ -14,7 +14,7 @@ public class YoreLinger extends AbstractTheresaCard {
 
     public YoreLinger() {
         super(ID,cardStrings.NAME,2,cardStrings.DESCRIPTION,CardType.POWER,CardRarity.UNCOMMON,CardTarget.SELF);
-        baseMagicNumber = magicNumber = 1;
+        baseMagicNumber = magicNumber = 2;
     }
 
     @Override

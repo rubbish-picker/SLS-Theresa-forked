@@ -7,14 +7,17 @@ import Theresa.effect.FinaleEffect;
 import Theresa.patch.DustPatch;
 import Theresa.patch.OtherEnum;
 import Theresa.patch.SilkPatch;
+import Theresa.silk.MemorySilk;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
 
 
 public class Finale extends AbstractTheresaCard {
@@ -27,14 +30,22 @@ public class Finale extends AbstractTheresaCard {
         baseDamage = damage = 80;
         this.isMultiDamage = true;
         this.tags.add(OtherEnum.Theresa_Darkness);
+        SilkPatch.setSilkWithoutTrigger(this,new MemorySilk());
     }
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
-        addToBot(new VFXAction(abstractPlayer,new FinaleEffect(false),0.15F,true));
-        addToBot(new VFXAction(abstractPlayer,new FinaleEffect(true),0.15F,true));
-        addToBot(new LongWaitAction(0.4F));
+        FinaleEffect f1 = new FinaleEffect(false);
+        FinaleEffect f2 = new FinaleEffect(true);
+        if(FinaleEffect.compiled()){
+            addToBot(new VFXAction(abstractPlayer,f1,0.15F,true));
+            addToBot(new VFXAction(abstractPlayer,f2,0.15F,true));
+            addToBot(new LongWaitAction(0.4F));
+        }
+        else {
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(AbstractDungeon.player, new ShockWaveEffect(this.hb.cX, this.hb.cY, Settings.BLUE_TEXT_COLOR, ShockWaveEffect.ShockWaveType.CHAOTIC), 0.75F));
+        }
         addToBot(new DamageAllEnemiesAction(abstractPlayer,multiDamage,damageTypeForTurn,skillEffect));
     }
 

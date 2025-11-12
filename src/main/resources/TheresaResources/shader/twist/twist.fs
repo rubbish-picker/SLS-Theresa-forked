@@ -8,7 +8,7 @@ uniform float degree;//进程 范围[0,1]
 
 //"in" varyings from our vertex shader
 varying vec4 v_color;
-varying vec2 v_texCoord;//当前像素
+varying vec2 v_texCoord;
 
 
 void main() {
@@ -51,7 +51,7 @@ void main() {
     }
 
     // 6. 边缘光效果（平滑过渡）
-    float edgeGlow = 0.0;
+    vec3 edgeGlow = vec3(0.0,0.0,0.0);
     if (crackDist < crackFeather) {
         float glowIntensity = 1.0 - smoothstep(-crackFeather, crackFeather, crackDist);
         edgeGlow = glowIntensity * mix(0.5, 1.0, acceleratedProgress) * vec3(1.0, 0.7, 0.3);

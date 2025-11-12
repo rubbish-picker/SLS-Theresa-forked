@@ -8,7 +8,9 @@
       "theresa:此刻仅为你祝福",
       "theresa:众萨卡兹的恨意",
       "theresa:特蕾西娅的希望",
-      "theresa:转化"
+      "theresa:转化",
+      "theresa:忘却",
+      "theresa:存续"
     ]
   },
   "theresa:Operation": {
@@ -22,7 +24,17 @@
       "转化为微尘",
       "选择至多",
       "张以编织茧笼",
-      "丢弃，若可转化则转化为微尘"
+      "丢弃，若可转化则转化为微尘",
+      "张牌放入"
+    ]
+  },
+  "theresa:TypeSelect": {
+    "TEXT": [
+      "选择模式"
+    ],
+    "EXTRA_TEXT": [
+      "简单难度",
+      "正常难度"
     ]
   }
 }

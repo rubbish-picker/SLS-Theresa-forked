@@ -2,6 +2,7 @@ package Theresa.modcore;
 
 import Theresa.action.PlayCardAction;
 import Theresa.character.Theresa;
+import Theresa.helper.CivilightHelper;
 import Theresa.helper.RegisterHelper;
 import Theresa.patch.*;
 import basemod.BaseMod;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -23,8 +25,10 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.Properties;
 
 @SpireInitializer
 public class TheresaMod implements PreStartGameSubscriber,PreUpdateSubscriber,RenderSubscriber,StartGameSubscriber,OnPlayerTurnStartPostDrawSubscriber,PostBattleSubscriber,OnPlayerTurnStartSubscriber,OnStartBattleSubscriber,PostInitializeSubscriber,EditStringsSubscriber, EditKeywordsSubscriber, EditCardsSubscriber, EditCharactersSubscriber, EditRelicsSubscriber {
@@ -39,11 +43,23 @@ public class TheresaMod implements PreStartGameSubscriber,PreUpdateSubscriber,Re
     
     public static void initialize(){
         new TheresaMod();
+
+        try{
+            Properties defaults = new Properties();
+            defaults.setProperty("defaultType","0");
+            SpireConfig config = new SpireConfig("Theresa_FimmlpS","Common",defaults);
+            DefaultTypeIndex = config.getInt("defaultType");
+
+        }catch (IOException var1){
+            var1.printStackTrace();
+        }
     }
     
     public static void logSomething(String message){
         logger.info(message);
     }
+
+    public static int DefaultTypeIndex = 0;
     
     public TheresaMod(){
         BaseMod.subscribe(this);
@@ -162,6 +178,7 @@ public class TheresaMod implements PreStartGameSubscriber,PreUpdateSubscriber,Re
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         //DustPatch.preBattle();
+        CivilightHelper.atBattleStart();
     }
 
     @Override

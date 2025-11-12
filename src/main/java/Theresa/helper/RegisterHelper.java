@@ -3,9 +3,9 @@ package Theresa.helper;
 import Theresa.card.attack.*;
 import Theresa.card.power.*;
 import Theresa.card.skill.*;
+import Theresa.card.status.Stop;
 import Theresa.card.status.TheGift;
-import Theresa.relic.BabelRelic;
-import Theresa.relic.TheEnd;
+import Theresa.relic.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 public class RegisterHelper {
     public static ArrayList<String> startDeck = new ArrayList<>();
     public static ArrayList<String> startRelic = new ArrayList<>();
+    public static ArrayList<String> bossRelic = new ArrayList<>();
 
     public static ArrayList<AbstractCard> getCardsToAdd(){
         ArrayList<AbstractCard> list = new ArrayList<>();
@@ -31,7 +32,7 @@ public class RegisterHelper {
         //COMMON
         list.add(new Oscillation());
         list.add(new Candle());
-        list.add(new DeadOne());
+        //list.add(new DeadOne());
         list.add(new TowardEndfield());
         list.add(new FromNight());
         list.add(new Iterate());
@@ -41,8 +42,19 @@ public class RegisterHelper {
         list.add(new Babel());
         list.add(new WeaveSpread());
         list.add(new EmotionSame());
+        list.add(new SarkazSee());
+        list.add(new AStory());
+        list.add(new Hardship());
+        list.add(new SkyDisaster());
+        list.add(new WrongInteraction());
+        list.add(new FlowerSilk());
+        list.add(new EndDust());
+        list.add(new FallFromMemory());
+        list.add(new UnseenFuture());
 
         //UNCOMMON
+        list.add(new ToughHistory());
+        list.add(new TimeToDie());
         list.add(new Silk());
         list.add(new Echoism());
         list.add(new PastDust());
@@ -66,6 +78,7 @@ public class RegisterHelper {
         list.add(new ConnectedPain());
         list.add(new Terminate());
         list.add(new IdealReflection());
+        list.add(new Starter());
         list.add(new PastCallFuture());
         list.add(new IntoHistory());
         list.add(new MindOscillation());
@@ -73,6 +86,16 @@ public class RegisterHelper {
         list.add(new Branch());
         list.add(new KingInheritance());
         list.add(new WhenItIsBye());
+        list.add(new FromRose());
+        list.add(new FutureStop());
+        list.add(new Withering());
+        list.add(new GoodNight());
+        list.add(new BeforeDust());
+        list.add(new Wordless());
+        list.add(new UnforgivableSin());
+        list.add(new NightBeforeWar());
+        list.add(new CivilightEterna());
+        list.add(new SadDust());
 
         //RARE
         list.add(new GuiltyWillEnd());
@@ -85,12 +108,18 @@ public class RegisterHelper {
         list.add(new TheBanshee());
         list.add(new TheWar());
         list.add(new ThousandsWish());
+        list.add(new ManyLight());
         list.add(new OnlyForYou());
         list.add(new TheAnswer());
+        list.add(new MemorizedMemory());
+        list.add(new DyingRose());
+        list.add(new Rare());
+        list.add(new MindOcean());
 
         //OTHER
         list.add(new TheGift());
         list.add(new Originium());
+        list.add(new Stop());
 
         for(AbstractCard c : list){
             if(c.color == AbstractCard.CardColor.GREEN){
@@ -106,9 +135,24 @@ public class RegisterHelper {
         ArrayList<AbstractRelic> list = new ArrayList<>();
         if(onlyTheresa){
             list.add(new BabelRelic());
+            list.add(new UnknownRelic());
 
             //BOSS
             list.add(new TheEnd());
+            list.add(new TheRecall());
+            list.add(new DeadCane());
+            list.add(new SingerMask());
+            list.add(new BraveBlade());
+            list.add(new TenRings());
+            list.add(new KnownRelic());
+
+            if(bossRelic.isEmpty()){
+                for(AbstractRelic r : list){
+                    if(r.tier == AbstractRelic.RelicTier.BOSS){
+                        bossRelic.add(r.relicId);
+                    }
+                }
+            }
         }
         else{
 
@@ -128,6 +172,7 @@ public class RegisterHelper {
         startDeck.add(ADust.ID);
 
         startRelic.add(BabelRelic.ID);
+        startRelic.add(UnknownRelic.ID);
     }
 
     static {
