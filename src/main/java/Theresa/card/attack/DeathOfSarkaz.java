@@ -27,7 +27,11 @@ public class DeathOfSarkaz extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
-        addToBot(new DamageAllEnemiesAction(abstractPlayer,this.multiDamage, damageTypeForTurn,skillEffect));
+        int[] randomMultiDamage = new int[multiDamage.length];
+        for(int i=0; i<multiDamage.length; i++) {
+             randomMultiDamage[i] = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, multiDamage[i]*2);
+        }
+        addToBot(new DamageAllEnemiesAction(abstractPlayer,randomMultiDamage, damageTypeForTurn,skillEffect));
     }
 
     @Override

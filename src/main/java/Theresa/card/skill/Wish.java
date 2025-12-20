@@ -22,7 +22,8 @@ public class Wish extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new GainBlockAction(abstractPlayer, block));
+        int randomBlock = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.block*2);
+        addToBot(new GainBlockAction(abstractPlayer, randomBlock));
         addToBot(new LessDrawAction(magicNumber));
     }
 

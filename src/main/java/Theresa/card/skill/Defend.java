@@ -4,6 +4,7 @@ import Theresa.card.AbstractTheresaCard;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -19,7 +20,8 @@ public class Defend extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new GainBlockAction(abstractPlayer,block));
+        int randomBlock = AbstractDungeon.cardRandomRng.random(0, this.block*2);
+        addToBot(new GainBlockAction(abstractPlayer,randomBlock));
     }
 
     @Override

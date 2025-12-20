@@ -32,7 +32,8 @@ public class ThereItIs extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn), skillEffect));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn), skillEffect));
         addToBot(new ResetItAction(this));
     }
 

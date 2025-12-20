@@ -30,7 +30,8 @@ public class Branch extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
+        int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
 //        if(!dontTriggerOnUseCard && !DustPatch.dustManager.dustCards.isEmpty()){
 //            ArrayList<AbstractCard> selections = new ArrayList<>();
 //            for(int i =0;i<4;i++){

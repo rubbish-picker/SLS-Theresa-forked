@@ -33,8 +33,10 @@ public class Terminate extends AbstractTheresaCard {
         }
         addToBot(new TheresaAttackAction(true));
         addToBot(new TerminateAction(abstractPlayer,freeToPlayOnce,energyOnUse));
-        for(int i =0;i<magicNumber;i++)
-            addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),skillEffect));
+        for(int i =0;i<magicNumber;i++) {
+            int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+            addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),skillEffect));
+        }
     }
 
     private int getCurrentEnergy(){
@@ -89,4 +91,3 @@ public class Terminate extends AbstractTheresaCard {
         }
     }
 }
-

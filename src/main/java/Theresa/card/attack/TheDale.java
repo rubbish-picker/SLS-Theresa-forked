@@ -19,7 +19,11 @@ public class TheDale extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DaleAction(multiDamage,damageTypeForTurn,skillEffect));
+        int[] randomMultiDamage = new int[multiDamage.length];
+        for(int i=0; i<multiDamage.length; i++) {
+             randomMultiDamage[i] = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, multiDamage[i]*2);
+        }
+        addToBot(new DaleAction(randomMultiDamage,damageTypeForTurn,skillEffect));
     }
 
     @Override

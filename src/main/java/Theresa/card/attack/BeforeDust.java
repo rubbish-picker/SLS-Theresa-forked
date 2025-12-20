@@ -7,6 +7,7 @@ import Theresa.card.AbstractTheresaCard;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -23,8 +24,9 @@ public class BeforeDust extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
-        addToBot(new DrawCardAction(magicNumber,new BeforeDustAction(magicNumber,abstractMonster,damage,damageTypeForTurn,skillEffect),true));
-        addToBot(new IncreaseMagicNumberAction(this,1));
+        int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DrawCardAction(magicNumber,new BeforeDustAction(magicNumber,abstractMonster,randomNumber,damageTypeForTurn,skillEffect),true));
+        addToBot(new IncreaseMagicNumberAction(this,AbstractDungeon.cardRandomRng.random(0, 2)));
     }
 
     @Override
@@ -35,5 +37,3 @@ public class BeforeDust extends AbstractTheresaCard {
         }
     }
 }
-
-

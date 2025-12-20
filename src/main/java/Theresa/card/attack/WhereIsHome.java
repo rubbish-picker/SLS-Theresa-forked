@@ -25,11 +25,13 @@ public class WhereIsHome extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),attackEffect));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),attackEffect));
         addToBot(new ApplyPowerAction(abstractPlayer,abstractPlayer,new HatePower(abstractPlayer,magicNumber),magicNumber));
         for(AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
             if(!mo.isDeadOrEscaped()) {
-                addToBot(new ApplyPowerAction(mo,abstractPlayer,new HatePower(mo,magicNumber),magicNumber));
+                int randomNumber2 = AbstractDungeon.cardRandomRng.random(0, this.magicNumber*2);
+                addToBot(new ApplyPowerAction(mo,abstractPlayer,new HatePower(mo,randomNumber2),randomNumber2));
             }
         }
     }
@@ -42,5 +44,3 @@ public class WhereIsHome extends AbstractTheresaCard {
         }
     }
 }
-
-

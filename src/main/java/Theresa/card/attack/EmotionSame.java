@@ -20,8 +20,12 @@ public class EmotionSame extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAllEnemiesAction(abstractPlayer,multiDamage,damageTypeForTurn,attackEffect));
-        addToBot(new EmotionSameAction(1));
+        int[] randomMultiDamage = new int[multiDamage.length];
+        for(int i=0; i<multiDamage.length; i++) {
+             randomMultiDamage[i] = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, multiDamage[i]*2);
+        }
+        addToBot(new DamageAllEnemiesAction(abstractPlayer,randomMultiDamage,damageTypeForTurn,attackEffect));
+        addToBot(new EmotionSameAction(com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, 2)));
     }
 
     @Override

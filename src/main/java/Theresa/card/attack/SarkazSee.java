@@ -22,7 +22,8 @@ public class SarkazSee extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),attackEffect));
+        int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),attackEffect));
         addToBot(new CivilightAction(CardGroup.CardGroupType.HAND,1).setType(true,false,false,false,false).setCopy(1,true,false));
     }
 
@@ -34,4 +35,3 @@ public class SarkazSee extends AbstractTheresaCard {
         }
     }
 }
-

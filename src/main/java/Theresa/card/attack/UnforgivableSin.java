@@ -35,7 +35,8 @@ public class UnforgivableSin extends AbstractTheresaCard {
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
         for(int i = 0; i < this.magicNumber; i++) {
-            addToBot(new DamageAction(abstractMonster, new DamageInfo(abstractPlayer, damage, damageTypeForTurn), skillEffect));
+            int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+            addToBot(new DamageAction(abstractMonster, new DamageInfo(abstractPlayer, randomNumber, damageTypeForTurn), skillEffect));
         }
     }
 

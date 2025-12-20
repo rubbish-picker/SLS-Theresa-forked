@@ -22,19 +22,22 @@ public class Oscillation extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),attackEffect));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),attackEffect));
     }
 
     @Override
     public void triggerWhenBecomeDust() {
         this.flash();
-        addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(magicNumber,true), DamageInfo.DamageType.THORNS,skillEffect));
+        int randomMagic = AbstractDungeon.cardRandomRng.random(0, magicNumber*2);
+        addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(randomMagic,true), DamageInfo.DamageType.THORNS,skillEffect));
     }
 
     @Override
     public void triggerWhenNoLongerDust() {
         this.flash();
-        addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(magicNumber,true), DamageInfo.DamageType.THORNS,skillEffect));
+        int randomMagic = AbstractDungeon.cardRandomRng.random(0, magicNumber*2);
+        addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(randomMagic,true), DamageInfo.DamageType.THORNS,skillEffect));
     }
 
     @Override

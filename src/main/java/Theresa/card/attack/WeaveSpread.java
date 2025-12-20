@@ -26,7 +26,8 @@ public class WeaveSpread extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         for(int i = 0; i < this.magicNumber; i++) {
-            addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),attackEffect));
+            int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+            addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),attackEffect));
         }
         addToBot(new SpreadAction(CardGroup.CardGroupType.DRAW_PILE));
         addToBot(new SpreadAction(CardGroup.CardGroupType.DISCARD_PILE));

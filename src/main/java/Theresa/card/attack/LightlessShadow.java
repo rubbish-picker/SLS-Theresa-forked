@@ -21,7 +21,8 @@ public class LightlessShadow extends AbstractTheresaCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         addToBot(new TheresaAttackAction(true));
-        addToBot(new LightlessAction(abstractMonster,damage,damageTypeForTurn,attackEffect,magicNumber));
+        int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new LightlessAction(abstractMonster,randomNumber,damageTypeForTurn,attackEffect,magicNumber));
     }
 
     @Override
@@ -33,4 +34,3 @@ public class LightlessShadow extends AbstractTheresaCard {
         }
     }
 }
-

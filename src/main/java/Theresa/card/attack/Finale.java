@@ -46,7 +46,11 @@ public class Finale extends AbstractTheresaCard {
         else {
             AbstractDungeon.actionManager.addToBottom(new VFXAction(AbstractDungeon.player, new ShockWaveEffect(this.hb.cX, this.hb.cY, Settings.BLUE_TEXT_COLOR, ShockWaveEffect.ShockWaveType.CHAOTIC), 0.75F));
         }
-        addToBot(new DamageAllEnemiesAction(abstractPlayer,multiDamage,damageTypeForTurn,skillEffect));
+        int[] randomMultiDamage = new int[multiDamage.length];
+        for(int i=0; i<multiDamage.length; i++) {
+             randomMultiDamage[i] = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, multiDamage[i]*2);
+        }
+        addToBot(new DamageAllEnemiesAction(abstractPlayer,randomMultiDamage,damageTypeForTurn,skillEffect));
     }
 
     @Override

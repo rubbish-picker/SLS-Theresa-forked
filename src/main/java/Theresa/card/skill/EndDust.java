@@ -30,7 +30,8 @@ public class EndDust extends AbstractTheresaCard {
         if(!TheresaHelper.drawnAsDust(this)) {
             this.flash();
             addToBot(new DiscardSpecificCardAction(this, AbstractDungeon.player.hand));
-            addToBot(new GainBlockAction(AbstractDungeon.player,magicNumber));
+            int randomBlock = AbstractDungeon.cardRandomRng.random(0, magicNumber*2);
+            addToBot(new GainBlockAction(AbstractDungeon.player,randomBlock));
         }
     }
 

@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -27,7 +28,8 @@ public class Strike extends AbstractTheresaCard {
         //addToBot(new TheresaAttackAction());
         //addToBot(new VFXAction(abstractPlayer,new FinaleEffect(false),0.2F,true));
         //addToBot(new VFXAction(abstractPlayer,new FinaleEffect(true),0.2F,true));
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),attackEffect));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),attackEffect));
     }
 
     @Override

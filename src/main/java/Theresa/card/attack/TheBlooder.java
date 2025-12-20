@@ -26,7 +26,8 @@ public class TheBlooder extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn), attackEffect));
+        int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn), attackEffect));
         if(cardsToPreview != null) {
             addToBot(new MakeTempCardInDrawPileAction(cardsToPreview,1,true,true));
         }
@@ -45,5 +46,3 @@ public class TheBlooder extends AbstractTheresaCard {
         }
     }
 }
-
-

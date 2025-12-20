@@ -42,7 +42,8 @@ public class GoodNight extends AbstractTheresaCard {
         for(AbstractMonster m : monsters){
             if(isInAutoplay)
                 calculateCardDamage(m);
-            addToBot(new DamageAction(m,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),skillEffect));
+            int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+            addToBot(new DamageAction(m,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),skillEffect));
             addToBot(new ApplyPowerAction(m,abstractPlayer,new DyingPower(m,magicNumber),magicNumber));
             //addToBot(new DyingBurstAction(abstractPlayer,abstractMonster));
             addToBot(new ApplyPowerAction(m,abstractPlayer,new DyingBurstPower(m,1),1));

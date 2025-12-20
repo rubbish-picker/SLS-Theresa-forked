@@ -23,16 +23,18 @@ public class Withering extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,damage,damageTypeForTurn),attackEffect));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.damage*2);
+        addToBot(new DamageAction(abstractMonster,new DamageInfo(abstractPlayer,randomNumber,damageTypeForTurn),attackEffect));
         addToBot(new ApplyPowerAction(abstractMonster,abstractPlayer,new DyingPower(abstractMonster,magicNumber),magicNumber));
     }
 
     @Override
     public void triggerWhenBecomeDust() {
         this.flash();
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.magicNumber*2);
         for(AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
             if(!mo.isDeadOrEscaped()){
-                addToBot(new ApplyPowerAction(mo,AbstractDungeon.player,new DyingPower(mo,magicNumber),magicNumber));
+                addToBot(new ApplyPowerAction(mo,AbstractDungeon.player,new DyingPower(mo,randomNumber),randomNumber));
             }
         }
     }
@@ -40,9 +42,10 @@ public class Withering extends AbstractTheresaCard {
     @Override
     public void triggerWhenNoLongerDust() {
         this.flash();
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.magicNumber*2);
         for(AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
             if(!mo.isDeadOrEscaped()){
-                addToBot(new ApplyPowerAction(mo,AbstractDungeon.player,new DyingPower(mo,magicNumber),magicNumber));
+                addToBot(new ApplyPowerAction(mo,AbstractDungeon.player,new DyingPower(mo,randomNumber),randomNumber));
             }
         }
     }
