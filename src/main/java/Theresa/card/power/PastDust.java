@@ -6,6 +6,7 @@ import Theresa.power.buff.PastDustPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -20,7 +21,8 @@ public class PastDust extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new ApplyPowerAction(abstractPlayer,abstractPlayer,new PastDustPower(abstractPlayer,magicNumber),magicNumber));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.magicNumber*2);
+        addToBot(new ApplyPowerAction(abstractPlayer,abstractPlayer,new PastDustPower(abstractPlayer,randomNumber),randomNumber));
     }
 
     @Override

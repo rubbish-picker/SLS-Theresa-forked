@@ -19,7 +19,8 @@ public class BabelRelic extends CustomRelic {
     public void atBattleStartPreDraw() {
         this.flash();
         addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-        addToBot(new DrawCardAction(3));
+        int randomNumber = com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng.random(3, 6);
+        addToBot(new DrawCardAction(randomNumber));
     }
 
     @Override

@@ -5,6 +5,7 @@ import Theresa.card.AbstractTheresaCard;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -19,8 +20,9 @@ public class DustWithLight extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new IncreaseMaxDustAction(magicNumber));
-        addToBot(new DrawCardAction(magicNumber));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.magicNumber*2);
+        addToBot(new IncreaseMaxDustAction(randomNumber));
+        addToBot(new DrawCardAction(randomNumber));
     }
 
     @Override

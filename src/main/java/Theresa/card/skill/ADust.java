@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -19,8 +20,9 @@ public class ADust extends AbstractTheresaCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new DrawCardAction(abstractPlayer,magicNumber));
-        addToBot(new GainEnergyAction(1));
+        int randomNumber = AbstractDungeon.cardRandomRng.random(0, this.magicNumber*2);
+        addToBot(new DrawCardAction(abstractPlayer,randomNumber));
+        addToBot(new GainEnergyAction(AbstractDungeon.cardRandomRng.random(0, 2)));
     }
 
     @Override
